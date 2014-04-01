@@ -1,6 +1,6 @@
-# Roqua::Opencpu
+# Roqua::OpenCPU
 
-TODO: Write a gem description
+Roqua wrapper for the OpenCPU REST API.
 
 ## Installation
 
