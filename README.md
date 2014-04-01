@@ -18,7 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    data = { '.someFunction': [{ x: [1,2,3,4,5], y: [7,3,9,4,1] }]}
+    response = Roqua::OpenCPU.execute 'PackageName', 'ScriptName', data
 
 ## Contributing
 
