@@ -1,6 +1,5 @@
 require 'httparty'
 require 'yajl'
-require "roqua/opencpu/version"
 
 begin
   require "pry"
@@ -9,17 +8,25 @@ end
 
 module Roqua
   module OpenCPU
-    class UnsupportedHTTPMethod < StandardError; end
 
-    include HTTParty
+    class << self
+      attr_writer :configuration
+    end
 
-    format   :json
-    headers  'Content-Type' => 'application/json'
-    base_uri 'http://10.210.50.11/ocpu'
+    def self.client
+      Client.new
+    end
 
-    def self.execute(package, function, data, method = :post)
-      raise UnsupportedHTTPMethod if method != :post
-      self.send(method, "/library/#{package}/R/#{function}/json", body: data)
+    def self.configuration
+      @configuration ||= Roqua::OpenCPU::Configuration.new
+    end
+
+    def self.configure
+      yield(configuration)
     end
   end
 end
+
+require "roqua/opencpu/configuration"
+require "roqua/opencpu/client"
+require "roqua/opencpu/version"
