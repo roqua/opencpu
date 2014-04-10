@@ -6,7 +6,7 @@ Roqua wrapper for the OpenCPU REST API.
 
 Add this line to your application's Gemfile:
 
-    gem 'roqua-opencpu'
+    gem 'opencpu'
 
 And then execute:
 
@@ -14,16 +14,16 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install roqua-opencpu
+    $ gem install opencpu
 
 ## Usage
 
     data = { '.someFunction': [{ x: [1,2,3,4,5], y: [7,3,9,4,1] }]}
-    response = Roqua::OpenCPU.execute 'PackageName', 'ScriptName', data
+    response = OpenCPU.execute 'PackageName', 'ScriptName', data
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/roqua-opencpu/fork )
+1. Fork it ( http://github.com/roqua/opencpu/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

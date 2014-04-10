@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'roqua/opencpu/version'
+require 'opencpu/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "roqua-opencpu"
-  spec.version       = Roqua::OpenCPU::VERSION
+  spec.name          = "opencpu"
+  spec.version       = OpenCPU::VERSION
   spec.authors       = ["Ivan Malykh"]
   spec.email         = ["ivan@roqua.nl"]
   spec.summary       = %q{Wrapper around OpenCPU REST API}

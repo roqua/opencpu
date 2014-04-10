@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Roqua::OpenCPU::Client do
+describe OpenCPU::Client do
 
   it 'initializes with HTTParty' do
     expect(described_class.ancestors).to include HTTParty
@@ -12,7 +12,7 @@ describe Roqua::OpenCPU::Client do
 
   context 'configured' do
     before do
-      Roqua::OpenCPU.configure do |config|
+      OpenCPU.configure do |config|
         config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
         config.username     = 'foo'
         config.password     = 'bar'
@@ -31,7 +31,7 @@ describe Roqua::OpenCPU::Client do
 
   describe '#execute' do
     before do
-      Roqua::OpenCPU.configure do |config|
+      OpenCPU.configure do |config|
         config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
         config.username     = 'foo'
         config.password     = 'bar'
