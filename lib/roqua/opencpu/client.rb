@@ -10,9 +10,19 @@ module Roqua
         self.class.base_uri Roqua::OpenCPU.configuration.endpoint_url
       end
 
-      def execute(package, function, data = nil, method = :post)
+      def default_options
+        {
+          basic_auth: {
+            username: Roqua::OpenCPU.configuration.username,
+            password: Roqua::OpenCPU.configuration.password
+          }
+        }
+      end
+
+      def execute(package, function, data = {}, method = :post)
         raise UnsupportedHTTPMethod if unsupported_http_method? method
-        self.class.send(method, "/library/#{package}/R/#{function}/json", body: data.to_json)
+        options = default_options.merge body: data.to_json
+        self.class.send(method, "/library/#{package}/R/#{function}/json", options)
       end
 
       private
