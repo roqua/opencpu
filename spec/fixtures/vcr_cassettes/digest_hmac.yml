@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://foo:bar@staging.opencpu.roqua.nl/ocpu/library/digest/R/hmac/json
+    uri: https://foo:bar@public.opencpu.org/ocpu/library/digest/R/hmac/json
     body:
       encoding: UTF-8
       string: '{"key":"baz","object":"qux"}'
@@ -14,41 +14,43 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Date:
-      - Thu, 10 Apr 2014 10:11:56 GMT
       Server:
-      - Apache
+      - nginx/1.4.1 (Ubuntu)
+      Date:
+      - Thu, 10 Apr 2014 12:28:02 GMT
+      Content-Type:
+      - application/json
+      Location:
+      - https://public.opencpu.org/ocpu/tmp/x030f9d57/
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
       Cache-Control:
       - max-age=300, public
-      Location:
-      - "/ocpu/tmp/x09896390/"
       X-Ocpu-Session:
-      - x09896390
+      - x030f9d57
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Headers:
-      - Origin, Content-Type, Accept
+      - Origin, Content-Type, Accept, Cache-Control
       Access-Control-Expose-Headers:
-      - Location, X-ocpu-session, Content-Type
+      - Location, X-ocpu-session, Content-Type, Cache-Control
       X-Ocpu-R:
-      - R version 3.0.2 (2013-09-25)
+      - R version 3.1.0 beta (2014-03-28 r65330)
       X-Ocpu-Locale:
       - en_US.UTF-8
       X-Ocpu-Time:
-      - 2014-04-10 12:11:56 CEST
+      - 2014-04-10 05:28:02 PDT
       X-Ocpu-Version:
-      - 1.2.2
+      - 1.2.99
       X-Ocpu-Server:
       - rApache
-      Connection:
-      - close
-      Transfer-Encoding:
-      - chunked
-      Content-Type:
-      - application/json
+      X-Ocpu-Cache:
+      - MISS
     body:
       encoding: UTF-8
       string: "[\n\t\"22e2a7a268bf076801eefe7cd0119bb9\"\n]\n"
     http_version: 
-  recorded_at: Thu, 10 Apr 2014 10:11:57 GMT
+  recorded_at: Thu, 10 Apr 2014 12:28:03 GMT
 recorded_with: VCR 2.9.0
