@@ -13,14 +13,14 @@ describe OpenCPU::Client do
   context 'configured' do
     before do
       OpenCPU.configure do |config|
-        config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+        config.endpoint_url = 'https://public.opencpu.org/ocpu'
         config.username     = 'foo'
         config.password     = 'bar'
       end
     end
 
     it 'initializes with configured attributes' do
-      expect(described_class.new.class.base_uri).to eq 'https://staging.opencpu.roqua.nl/ocpu'
+      expect(described_class.new.class.base_uri).to eq 'https://public.opencpu.org/ocpu'
       expect(described_class.new.default_options).to eq({basic_auth: {username: 'foo', password: 'bar'}})
     end
   end
@@ -32,7 +32,7 @@ describe OpenCPU::Client do
   describe '#execute' do
     before do
       OpenCPU.configure do |config|
-        config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+        config.endpoint_url = 'https://public.opencpu.org/ocpu'
         config.username     = 'foo'
         config.password     = 'bar'
       end
