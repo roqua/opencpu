@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Roqua::OpenCPU::Configuration do
+describe OpenCPU::Configuration do
 
   it 'has an #endpoint_url' do
     expect(described_class.new).to respond_to :endpoint_url

@@ -1,6 +1,6 @@
 require File.expand_path('../../spec_helper.rb', __dir__)
 
-describe Roqua::OpenCPU do
+describe OpenCPU do
 
   it 'responds to #client' do
     expect(described_class).to respond_to :client
@@ -11,7 +11,7 @@ describe Roqua::OpenCPU do
   end
 
   it 'responds to #configuration' do
-    expect(Roqua::OpenCPU).to respond_to :configuration
+    expect(described_class).to respond_to :configuration
   end
 
   describe '#configure' do
