@@ -6,15 +6,22 @@ describe Roqua::OpenCPU::Client do
     expect(described_class.ancestors).to include HTTParty
   end
 
+  it 'provides #default_options' do
+    expect(described_class.new).to respond_to :default_options
+  end
+
   context 'configured' do
     before do
       Roqua::OpenCPU.configure do |config|
         config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+        config.username     = 'foo'
+        config.password     = 'bar'
       end
     end
 
     it 'initializes with configured attributes' do
       expect(described_class.new.class.base_uri).to eq 'https://staging.opencpu.roqua.nl/ocpu'
+      expect(described_class.new.default_options).to eq({basic_auth: {username: 'foo', password: 'bar'}})
     end
   end
 
@@ -26,16 +33,17 @@ describe Roqua::OpenCPU::Client do
     before do
       Roqua::OpenCPU.configure do |config|
         config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+        config.username     = 'foo'
+        config.password     = 'bar'
       end
     end
 
     let(:client) { described_class.new }
 
-    it 'returns a correct EuStockMarkets response' do
-      VCR.use_cassette :eu_stock_markets do
-        response = client.execute('datasets', 'EuStockMarkets', nil, :get)
-        expect(response[0][0]).to eq 1628.75
-        expect(response[0][1]).to eq 1678.1
+    it 'returns a correct HMAC response' do
+      VCR.use_cassette :digest_hmac do
+        response = client.execute('digest', 'hmac', key: 'baz', object: 'qux')
+        expect(response[0]).to eq '22e2a7a268bf076801eefe7cd0119bb9'
       end
     end
   end
