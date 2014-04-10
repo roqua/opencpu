@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://foo:bar@staging.opencpu.roqua.nl/ocpu/library/digest/R/hmac/json
+    body:
+      encoding: UTF-8
+      string: '{"key":"baz","object":"qux"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 10 Apr 2014 10:11:56 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - max-age=300, public
+      Location:
+      - "/ocpu/tmp/x09896390/"
+      X-Ocpu-Session:
+      - x09896390
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type
+      X-Ocpu-R:
+      - R version 3.0.2 (2013-09-25)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2014-04-10 12:11:56 CEST
+      X-Ocpu-Version:
+      - 1.2.2
+      X-Ocpu-Server:
+      - rApache
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: "[\n\t\"22e2a7a268bf076801eefe7cd0119bb9\"\n]\n"
+    http_version: 
+  recorded_at: Thu, 10 Apr 2014 10:11:57 GMT
+recorded_with: VCR 2.9.0
