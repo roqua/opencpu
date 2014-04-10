@@ -12,13 +12,13 @@ module Roqua
 
       def execute(package, function, data = nil, method = :post)
         raise UnsupportedHTTPMethod if unsupported_http_method? method
-        self.class.send(method, "/library/#{package}/R/#{function}/json", body: data)
+        self.class.send(method, "/library/#{package}/R/#{function}/json", body: data.to_json)
       end
 
       private
 
       def supported_http_methods
-        [:get, :post]
+        [:post]
       end
 
       def unsupported_http_method?(method)
