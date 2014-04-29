@@ -1,0 +1,174 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://foo:bar@public.opencpu.org/ocpu/library/digest/R/hmac
+    body:
+      encoding: UTF-8
+      string: '{"key":"baz","object":"qux"}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Tue, 29 Apr 2014 15:58:21 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Location:
+      - https://public.opencpu.org/ocpu/tmp/x04956b9f9b/
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=300, public
+      X-Ocpu-Session:
+      - x04956b9f9b
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Cache-Control
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      X-Ocpu-R:
+      - R version 3.1.0 (2014-04-10)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2014-04-29 08:58:12 PDT
+      X-Ocpu-Version:
+      - 1.4.1.99
+      X-Ocpu-Server:
+      - rApache
+      X-Ocpu-Cache:
+      - HIT
+    body:
+      encoding: UTF-8
+      string: |
+        /ocpu/tmp/x04956b9f9b/R/.val
+        /ocpu/tmp/x04956b9f9b/stdout
+        /ocpu/tmp/x04956b9f9b/warnings
+        /ocpu/tmp/x04956b9f9b/source
+        /ocpu/tmp/x04956b9f9b/console
+        /ocpu/tmp/x04956b9f9b/info
+    http_version: 
+  recorded_at: Tue, 29 Apr 2014 15:58:21 GMT
+- request:
+    method: get
+    uri: https://public.opencpu.org/ocpu/tmp/x04956b9f9b/info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Tue, 29 Apr 2014 15:58:22 GMT
+      Location:
+      - https://public.opencpu.org/ocpu/tmp/x04956b9f9b/info/print
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=86400, public
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Cache-Control
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      X-Ocpu-R:
+      - R version 3.1.0 (2014-04-10)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2014-04-29 08:58:22 PDT
+      X-Ocpu-Version:
+      - 1.4.1.99
+      X-Ocpu-Server:
+      - rApache
+      X-Ocpu-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: |
+        Redirect to http://ocpu/ocpu/tmp/x04956b9f9b/info/print
+    http_version: 
+  recorded_at: Tue, 29 Apr 2014 15:58:22 GMT
+- request:
+    method: get
+    uri: https://public.opencpu.org/ocpu/tmp/x04956b9f9b/info/print
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Tue, 29 Apr 2014 15:58:23 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=86400, public
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Cache-Control
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      X-Ocpu-R:
+      - R version 3.1.0 (2014-04-10)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2014-04-29 08:58:23 PDT
+      X-Ocpu-Version:
+      - 1.4.1.99
+      X-Ocpu-Server:
+      - rApache
+      Vary:
+      - Accept-Encoding
+      X-Ocpu-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: "R version 3.1.0 (2014-04-10)\nPlatform: x86_64-pc-linux-gnu (64-bit)\n\nlocale:\n
+        [1] LC_CTYPE=en_US.UTF-8    LC_NUMERIC=C            LC_TIME=en_US.UTF-8    \n
+        [4] LC_COLLATE=en_US.UTF-8  LC_MONETARY=en_US.UTF-8 LC_MESSAGES=C          \n
+        [7] LC_PAPER=C              LC_NAME=C               LC_ADDRESS=C           \n[10]
+        LC_TELEPHONE=C          LC_MEASUREMENT=C        LC_IDENTIFICATION=C    \n\nattached
+        base packages:\n[1] stats     graphics  grDevices utils     datasets  methods
+        \  base     \n\nother attached packages:\n[1] digest_0.6.4     opencpu_1.4.1.99\n\nloaded
+        via a namespace (and not attached):\n [1] brew_1.0-6         colorspace_1.2-4
+        \  devtools_1.5       dichromat_2.0-0   \n [5] evaluate_0.5.3     formatR_0.10
+        \      ggplot2_0.9.3.1    grid_3.1.0        \n [9] gtable_0.1.2       httpuv_99.999
+        \     httr_0.3           jsonlite_0.9.7    \n[13] knitr_1.5          labeling_0.2
+        \      lattice_0.20-29    MASS_7.3-31       \n[17] memoise_0.1        munsell_0.4.2
+        \     pander_0.3.8       parallel_3.1.0    \n[21] plyr_1.8.1         proto_0.3-10
+        \      RAppArmor_1.0.1    RColorBrewer_1.0-5\n[25] Rcpp_0.11.1        RCurl_1.95-4.1
+        \    reshape2_1.2.2     scales_0.2.3      \n[29] sendmailR_1.1-2    stringr_0.6.2
+        \     tools_3.1.0        unixtools_0.1-1   \n[33] whisker_0.3-2     \n"
+    http_version: 
+  recorded_at: Tue, 29 Apr 2014 15:58:23 GMT
+recorded_with: VCR 2.9.0
