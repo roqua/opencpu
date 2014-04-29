@@ -1,6 +1,6 @@
 # OpenCPU gem
 
-![Build Status](https://circleci.com/gh/roqua/roqua-opencpu.png?circle-token=4689df66bef26cd4aff65a4893c25400795b408a)
+![Build Status](https://circleci.com/gh/roqua/opencpu.png?circle-token=4689df66bef26cd4aff65a4893c25400795b408a)
 
 Roqua wrapper for the OpenCPU REST API.
 
