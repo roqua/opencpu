@@ -26,7 +26,4 @@ describe OpenCPU do
     end
   end
 
-  describe '#client' do
-
-  end
 end
