@@ -14,10 +14,10 @@ module OpenCPU
       parse_resources(location, resources)
     end
 
-    def graphics(type = :svg)
+    def graphics(which = 0, type = :svg)
       raise ResponseNotAvailableError unless @available_resources.has_key?(:graphics)
       raise UnsupportedFormatError unless [:png, :svg].include?(type)
-      process_resource @available_resources[:graphics].to_s + "/#{type}"
+      process_resource @available_resources[:graphics][which].to_s + "/#{type}"
     end
 
     def value
@@ -62,7 +62,13 @@ module OpenCPU
     def parse_resources(location, resources)
       resources.each do |resource|
         uri = URI.join(domain, resource)
-        @available_resources[key(uri, location)] = uri
+        key = key(uri, location)
+        if key == :graphics
+          @available_resources[key] ||= []
+          @available_resources[key] << uri
+        else
+          @available_resources[key] = uri
+        end
       end
     end
 
