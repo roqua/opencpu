@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://public.opencpu.org/ocpu/library/digest/R/hmac/json
+    uri: https://public.opencpu.org/ocpu/library/digest/R/hmac/
     body:
       encoding: UTF-8
       string: '{"key":"baz","object":"qux"}'
@@ -11,17 +11,17 @@ http_interactions:
       - application/json
   response:
     status:
-      code: 200
-      message: OK
+      code: 201
+      message: Created
     headers:
       Server:
       - nginx/1.4.6 (Ubuntu)
       Date:
-      - Thu, 01 May 2014 14:34:19 GMT
+      - Thu, 01 May 2014 14:34:16 GMT
       Content-Type:
-      - application/json
+      - text/plain; charset=utf-8
       Location:
-      - https://public.opencpu.org/ocpu/tmp/x0a6d5ac9c2/
+      - https://public.opencpu.org/ocpu/tmp/x0a79915480/
       Transfer-Encoding:
       - chunked
       Connection:
@@ -29,7 +29,7 @@ http_interactions:
       Cache-Control:
       - max-age=300, public
       X-Ocpu-Session:
-      - x0a6d5ac9c2
+      - x0a79915480
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Headers:
@@ -41,7 +41,7 @@ http_interactions:
       X-Ocpu-Locale:
       - en_US.UTF-8
       X-Ocpu-Time:
-      - 2014-05-01 07:34:19 PDT
+      - 2014-05-01 07:34:16 PDT
       X-Ocpu-Version:
       - 1.4.1.99
       X-Ocpu-Server:
@@ -50,7 +50,13 @@ http_interactions:
       - EXPIRED
     body:
       encoding: UTF-8
-      string: "[\n\t\"22e2a7a268bf076801eefe7cd0119bb9\"\n]\n"
+      string: |
+        /ocpu/tmp/x0a79915480/R/.val
+        /ocpu/tmp/x0a79915480/stdout
+        /ocpu/tmp/x0a79915480/warnings
+        /ocpu/tmp/x0a79915480/source
+        /ocpu/tmp/x0a79915480/console
+        /ocpu/tmp/x0a79915480/info
     http_version: 
-  recorded_at: Thu, 01 May 2014 14:34:22 GMT
+  recorded_at: Thu, 01 May 2014 14:34:19 GMT
 recorded_with: VCR 2.9.0

@@ -1,4 +1,4 @@
-require File.expand_path('../../spec_helper.rb', __dir__)
+require 'spec_helper'
 
 describe OpenCPU do
 
@@ -26,7 +26,4 @@ describe OpenCPU do
     end
   end
 
-  describe '#client' do
-
-  end
 end

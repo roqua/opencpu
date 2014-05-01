@@ -29,4 +29,5 @@ end
 
 require "opencpu/configuration"
 require "opencpu/client"
+require "opencpu/delayed_calculation"
 require "opencpu/version"
