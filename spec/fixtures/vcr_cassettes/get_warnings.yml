@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://foo:bar@public.opencpu.org/ocpu/library/digest/R/hmac
+    uri: https://public.opencpu.org/ocpu/library/digest/R/hmac
     body:
       encoding: UTF-8
       string: '{"key":"baz","object":"qux"}'

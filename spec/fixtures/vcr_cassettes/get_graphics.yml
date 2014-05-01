@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://foo:bar@public.opencpu.org/ocpu/library/graphics/R/plot
+    uri: https://public.opencpu.org/ocpu/library/graphics/R/plot
     body:
       encoding: UTF-8
       string: '{"x":5,"y":10}'
@@ -358,4 +358,180 @@ http_interactions:
         </svg>
     http_version: 
   recorded_at: Tue, 29 Apr 2014 15:47:18 GMT
+- request:
+    method: get
+    uri: https://public.opencpu.org/ocpu/tmp/x0f6a825bad/graphics/1/png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 30 Apr 2014 13:02:54 GMT
+      Content-Type:
+      - image/png
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=86400, public
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Cache-Control
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      X-Ocpu-R:
+      - R version 3.1.0 (2014-04-10)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2014-04-30 06:02:54 PDT
+      X-Ocpu-Version:
+      - 1.4.1.99
+      X-Ocpu-Server:
+      - rApache
+      X-Ocpu-Cache:
+      - MISS
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYCAMAAACtqHJCAAACalBMVEUAAAAB
+        AQECAgIDAwMEBAQFBQUHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBAR
+        ERETExMUFBQXFxcZGRkaGhobGxseHh4gICAiIiIkJCQlJSUmJiYnJycoKCgq
+        KiorKystLS0uLi4vLy8wMDAxMTEzMzM0NDQ1NTU3Nzc4ODg5OTk7Ozs8PDw9
+        PT0+Pj4/Pz9AQEBBQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlLS0tMTExN
+        TU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhZWVlaWlpbW1tc
+        XFxdXV1eXl5hYWFiYmJjY2NkZGRlZWVmZmZoaGhqampra2tsbGxtbW1wcHBx
+        cXF0dHR1dXV2dnZ3d3d4eHh6enp7e3t8fHx9fX1+fn5/f3+BgYGEhISHh4eI
+        iIiKioqLi4uMjIyNjY2Ojo6Pj4+Tk5OUlJSVlZWWlpaXl5eYmJiZmZmampqb
+        m5ucnJyenp6fn5+goKChoaGioqKnp6eoqKipqamqqqqrq6usrKyurq6vr6+w
+        sLCzs7O0tLS1tbW3t7e4uLi5ubm7u7u8vLy9vb2+vr6/v7/AwMDBwcHDw8PE
+        xMTFxcXGxsbHx8fIyMjJycnKysrLy8vMzMzQ0NDR0dHS0tLT09PU1NTW1tbX
+        19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/h4eHi4uLj4+Pk5OTl5eXm5ubn
+        5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX2
+        9vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7///+IVSvoAAAL00lEQVR4nO3d
+        /5cVdR3H8RViEyGVUkxJ0vyu+QUzRPILlWiZZqJF+a3vX0wyTYvKStFKJUtK
+        E1MzyVxTSCO/QqCmsiK7939qvedI5+zufe3lzkxzd87j8cOeZT4zc95ceHJm
+        7t0zDLSAjgbqHgD6mUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAI
+        BAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKB
+        QCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQ
+        CAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCQYFAtv54NUx3P99ZVSC3XVD37w0K
+        +/DGygK5sfdjoU9cIhDoTCAQCAQCgUAgEAgEAoFAIBAIBCUF8uDwhE0CoQFK
+        CmTe5gmbBEIDFA5kn5lvG5gxc/yCQGiAwoE8fsLyTVu27L9hy/gFgdAAxS+x
+        dl1/6G9cYtFQZdyDbFx04VyB0Eil3KSPrD5/6/9+tWtb280/KDIX9IUKPge5
+        a3nbwjN6mwj6SHUfFF5+fu/HQp8oHMjQO8YvCIQGKBzI0oHZ89vGLwiEBih+
+        ibVi5eTbBUIDFA9k3arJtwuEBnCTDoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFA
+        IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAI
+        BAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKB
+        QCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQ
+        CAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQC
+        gUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAg
+        EAhKCGTb6NiXXVvGbxYIDVA4kMcP2+vgu1qtpyfsKRAaoHAgJ3/jzT/Of0Qg
+        NFPhQPZ+tdW68+hdAqGRCgfygbWt1uiyrwqERiocyB1zTnyxteWoIwVCExV/
+        F+v5O8YusobXXL17w68+2nbQaUVng9r5HAQCgUBQOJChd4xfEAgNUDiQpQOz
+        57eNXxAIDVD8EmvFysm3C4QGKB7IulWTbxcIDeAmHQKBQCAQCAQCgUAgEAgE
+        AoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFA
+        IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAI
+        BAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKB
+        QCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQ
+        CAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQC
+        gUAgEAgEAoGgy0BGXhnpvNPkiwKhAboJZMc3F7xrYOYh3xqebI+OiwKhAboJ
+        5KLF923d+e8HPv65yfbouCgQGqCbQPZ9rv396++dbI+OiwKp3NP3vlj3CI3X
+        TSBH3Nz+/tdHTbZHx0WBVGz088uu/MgNdU/RdN0E8sgBHzzvkvMOP/Avk+3R
+        cVEgFbv5mrEv5/617jEarqt3sd66Z/V3V9/z1uS7TFj87WVth59e1oxMqv1H
+        d+sP6x6j4Sr4HOSVTW0Xn9vbRHTpqofHvtx4e91jNJwPCqetvy15vvXYKa/W
+        PUbDdRPI0Dsm26PjokCqtn7JMZ/+R91DNF03gSwdmD2/bbI9Oi4KhAbo6hJr
+        xcqwS6dFgdAAXQWyblXYpdOiQGgAN+kQCAQCgUAgEAgEAoFAIBAIBAKBQCAQ
+        CAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQC
+        gUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAg
+        EAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgE
+        AoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFA
+        IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAI
+        BAKBQCAQCAQCgUBQTiAvb5+4TSA0QOFAHj/1k1vPHJx5yubxCwKhAQoHcvLK
+        K+d9ZXjH5Wft3vLE6rbTzi48HNStcCB7v/DqXjtare1zd28Zur3tY2eFo2B6
+        KBzIQeseHHi41brv0PELLrFogMKB3DTrPTcdeMnF+/1y/IJAaIDi72I99Vxr
+        6NprHpuwXSA0gM9BIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQC
+        gUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAg
+        EAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgE
+        AoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFA
+        IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAI
+        BAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKB
+        QCAQCASCcgJ5advEbQKhAQoH8sSiDc8cN3PWSf8cvyAQGqBwIMddMbzsSzuG
+        r1q6e8trm9ouXl54OKhb4UDmvNA65KlW6+U5u7fcfVnb8RcWHg7qVjiQxdeN
+        Xrq61br1yPELt93Y+1TQJwoH8q9jF549Y9Ep8x4YvyAQGqCEd7EevWXVDXe+
+        MWGzQGiA6j4HEQgNIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCATV
+        BfK7BUd3Mji7/w2+u+4JujCr7gG6MC1eyH06/l1d8GxVgXS267Qqzlqyb/++
+        7gm6sKjuAbpw7dq6J+hCzy+kQPqaQEoikD0mkJIIZI8JpCwCKYlA9phASiKQ
+        PSaQsgikJP0VyMiSKs5asu/cV/cEXVhc9wBduO7uuifoQs8vZCWBtIYrOWu5
+        3hype4IuTIcXcmejX8hqAoGGEAgEAoFAIBAIBAKBQCAQCAQCQRWB/Oz9c5Zt
+        qeC85Rrap+4JprR4cHDwzLqHmMKzS+Ye90TdQ0zh+4NvW9/TsRUEsnHfP29b
+        8oXyz1uuXSfMrHuEKR30h6GhCf93ap859nvPX9HvPzG2dWho6J7DXu/p2AoC
+        +cU5rdaaE8s/b7muX973gewcfKvuEab06MLR1vCGuqfowkUP9XZcBYGM7Brd
+        vuKq8s9bqo2Hbur7QDbud9bBn9pc9xTZLedcuuATz9Q9xdTWX9DjgZXcpK8Z
+        OODFKs5bnpFT127p+0DWL1w79NkT6p4iWzXjR09+8fi6p5jSyDG93idV8y7W
+        1muOqOS8pVn9mVb/B/K212a8VPcI0Q1j9x87Zvb9WzJ/OrXXIysI5Ce/aLW2
+        DfT3D2qfP3fe/gPzHqx7jOyhe8fuQ2Ztr3uM6M6xQN6cta3uMaZy5U97PbKC
+        QO5Y8Pf/fP3o8s9bpq2bN2+Ysbm/I27du9/9L3+553/6/j/emLfmlatPqnuK
+        qYwe3PObgRUEMvq19805/cnyz1uyaXCJdd0Bc8/JjzWr3/0fmnNG39+kPzq/
+        50N9kg6BQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAI
+        BAKBQCAQCAQCgUAgfWw6PLy66QTSx6bDw6ubTiD9azo8vLrxBNK/psPDqxtP
+        IP1rOjy8uvEE0t/6/eHVjSeQ/jUdHl7deALpX9Ph4dWNJ5A+Nh0eXt10AoFA
+        IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAI
+        BIL/Am5q0cQr+vvBAAAAAElFTkSuQmCC
+    http_version: 
+  recorded_at: Wed, 30 Apr 2014 13:02:56 GMT
+- request:
+    method: get
+    uri: https://public.opencpu.org/ocpu/tmp/x0f6a825bad/graphics/1/foo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Wed, 30 Apr 2014 13:07:08 GMT
+      Content-Type:
+      - text/plain
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=86400, public
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Cache-Control
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      X-Ocpu-R:
+      - R version 3.1.0 (2014-04-10)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2014-04-30 06:07:08 PDT
+      X-Ocpu-Version:
+      - 1.4.1.99
+      X-Ocpu-Server:
+      - rApache
+    body:
+      encoding: UTF-8
+      string: |
+        Invalid output format for objects: foo
+    http_version: 
+  recorded_at: Wed, 30 Apr 2014 13:07:10 GMT
 recorded_with: VCR 2.9.0
