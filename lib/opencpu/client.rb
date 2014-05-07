@@ -23,9 +23,10 @@ module OpenCPU
     private
 
     def process_query(url, data, &block)
+      return OpenCPU.configuration.fake_response if OpenCPU.test_mode?
       options   = { body: data.to_json, headers: { "Content-Type" => 'application/json' } }
       response  = self.class.post(url, options)
-      
+
       case response.code
       when 200..201
         return yield(response)

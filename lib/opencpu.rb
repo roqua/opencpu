@@ -8,7 +8,6 @@ end
 
 
 module OpenCPU
-
   class << self
     attr_writer :configuration
   end
@@ -23,6 +22,22 @@ module OpenCPU
 
   def self.configure
     yield(configuration)
+  end
+
+  def self.enable_test_mode!
+    self.configuration.mode = 'test'
+  end
+
+  def self.disable_test_mode!
+    self.configuration.mode = nil
+  end
+
+  def self.test_mode?
+    self.configuration.mode == 'test'
+  end
+
+  def self.set_fake_response!(response)
+    self.configuration.fake_response = response
   end
 end
 

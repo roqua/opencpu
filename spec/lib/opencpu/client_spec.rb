@@ -50,6 +50,9 @@ describe OpenCPU::Client do
   end
 
   describe '#execute' do
+    after do
+      OpenCPU.disable_test_mode!
+    end
     let(:client) { described_class.new }
 
     it 'is used to quickly return JSON results' do
@@ -69,6 +72,14 @@ describe OpenCPU::Client do
     it 'raises 400 with body' do
       VCR.use_cassette :digest_hmac_no_parameters do
         expect { client.execute(:digest, :hmac) }.to raise_error
+      end
+    end
+
+    context 'when in test mode' do
+      it 'returns a default fake response' do
+        OpenCPU.enable_test_mode!
+        response = client.execute(:digest, :hmac, key: 'baz', object: 'qux')
+        expect(response).to eq({ foo: "bar" })
       end
     end
   end

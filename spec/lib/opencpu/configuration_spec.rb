@@ -14,6 +14,10 @@ describe OpenCPU::Configuration do
     expect(described_class.new).to respond_to :password
   end
 
+  it 'has a #mode' do
+    expect(described_class.new).to respond_to :mode
+  end
+
   describe '#endpoint_url=' do
     it 'sets an url' do
       config = described_class.new
@@ -35,6 +39,14 @@ describe OpenCPU::Configuration do
       config = described_class.new
       config.password = 'bar'
       expect(config.password).to eq 'bar'
+    end
+  end
+
+  describe '#mode=' do
+    it 'sets the mode to test' do
+      config = described_class.new
+      config.mode = 'test'
+      expect(config.mode).to eq 'test'
     end
   end
 end
