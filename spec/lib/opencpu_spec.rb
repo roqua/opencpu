@@ -58,15 +58,12 @@ describe OpenCPU do
       expect(described_class.test_mode?).to be_false
     end
 
-    it 'sets default fake response when in test mode' do
+    it 'can set a fake response' do
       described_class.enable_test_mode!
-      expect(OpenCPU.configuration.fake_response).to eq({foo: 'bar'})
-    end
-
-    it 'can set optional fake response' do
-      described_class.enable_test_mode!
-      described_class.set_fake_response!({baz: 'qux'})
-      expect(OpenCPU.configuration.fake_response).to eq({baz: 'qux'})
+      described_class.set_fake_response!('foo', 'bar', {baz: 'qux'})
+      described_class.set_fake_response!('hoi', 'hai')
+      expect(OpenCPU.configuration.fake_responses['foo/bar']).to eq({baz: 'qux'})
+      expect(OpenCPU.configuration.fake_responses['hoi/hai']).to be_nil
     end
   end
 end

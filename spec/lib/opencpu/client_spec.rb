@@ -76,10 +76,25 @@ describe OpenCPU::Client do
     end
 
     context 'when in test mode' do
-      it 'returns a default fake response' do
+      it 'has an empty fake response when just enabled' do
         OpenCPU.enable_test_mode!
         response = client.execute(:digest, :hmac, key: 'baz', object: 'qux')
-        expect(response).to eq({ foo: "bar" })
+        expect(response).to be_nil
+      end
+
+      context 'setting fake responses' do
+        before do
+          OpenCPU.enable_test_mode!
+          OpenCPU.set_fake_response! :digest,    :hmac,       'response'
+          OpenCPU.set_fake_response! :animation, 'flip.coin', {response: 2}
+          OpenCPU.set_fake_response! :animation, 'flip.test', {response: 3}
+        end
+
+        it 'returns a fake response per R-script' do
+          expect(client.execute(:digest, :hmac)).to eq 'response'
+          expect(client.execute(:animation, 'flip.coin')).to eq({response: 2})
+          expect(client.execute(:animation, 'flip.test')).to eq({response: 3})
+        end
       end
     end
   end

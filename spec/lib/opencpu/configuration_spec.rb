@@ -18,6 +18,12 @@ describe OpenCPU::Configuration do
     expect(described_class.new).to respond_to :mode
   end
 
+  it 'defines #fake_responses Hash' do
+    config = described_class.new
+    expect(config).to respond_to :fake_responses
+    expect(config.fake_responses).to be_a Hash
+  end
+
   describe '#endpoint_url=' do
     it 'sets an url' do
       config = described_class.new
@@ -47,6 +53,23 @@ describe OpenCPU::Configuration do
       config = described_class.new
       config.mode = 'test'
       expect(config.mode).to eq 'test'
+    end
+  end
+
+  describe '#fake_responses' do
+    let(:config) { described_class.new }
+    it 'sets an empty fake responses' do
+      expect(config.fake_responses).to eq({})
+    end
+
+    it 'sets fake responses for R packages' do
+      config.add_fake_response 'foo/bar', {baz: 'qux'}
+      expect(config.fake_responses).to eq({'foo/bar' => {baz: 'qux'}})
+    end
+
+    it 'removes a fake response by key' do
+      config.remove_fake_response 'foo/bar'
+      expect(config.fake_responses).to eq({})
     end
   end
 end

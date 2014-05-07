@@ -23,7 +23,7 @@ module OpenCPU
     private
 
     def process_query(url, data, &block)
-      return OpenCPU.configuration.fake_response if OpenCPU.test_mode?
+      return fake_response_for(url) if OpenCPU.test_mode?
       options   = { body: data.to_json, headers: { "Content-Type" => 'application/json' } }
       response  = self.class.post(url, options)
 
@@ -38,7 +38,18 @@ module OpenCPU
     end
 
     def package_url(package, function, format = nil)
-      "/library/#{package.to_s}/R/#{function.to_s}/#{format.to_s}"
+      ['', 'library', package, 'R', function, format.to_s].join('/')
+    end
+
+    def fake_response_for(url)
+      key = derive_key_from_url(url)
+      OpenCPU.configuration.fake_responses.delete key
+    end
+
+    def derive_key_from_url(url)
+      url_parts    = url.gsub!(/^\//, '').split('/')
+      remove_items = ['R', 'library', 'json']
+      (url_parts - remove_items).join('/')
     end
   end
 end
