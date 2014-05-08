@@ -17,11 +17,86 @@ And then execute:
 Or install it yourself as:
 
     $ gem install opencpu
+    
+## Configuration
+
+    
 
 ## Usage
 
-    data = { '.someFunction': [{ x: [1,2,3,4,5], y: [7,3,9,4,1] }]}
-    response = OpenCPU.execute 'PackageName', 'ScriptName', data
+    client = OpenCPU.client
+
+### One-step call
+
+```Ruby
+client.execute :digest, :hmac, { key: 'foo', object: 'bar' }
+# => ['0c7a250281315ab863549f66cd8a3a53']
+```
+
+### Two-steps way
+
+To prepare the calculations on OpenCPU execute the `#prepare` method. It accepts the same arguments as `#execute`.
+
+```Ruby
+calculations = client.prepare :animation, 'flip.coin'
+```
+
+`calculations` variable now holds the calculations that OpenCPU returned to us.
+
+Which of the following methods are available depends on the response from the package.
+
+**#graphics(obj, type)**
+
+```Ruby
+calculations.graphics
+# => Returns the first SVG created by OpenCPU.
+calculations.graphics(1)
+# => Returns the second SVG created by OpenCPU.
+calculations.graphics(1, :png)
+# => Returns the second PNG created by OpenCPU.
+```
+
+**#value**
+
+```Ruby
+calculations.value
+# => Returns the raw output of the R-function.
+```
+
+**#stdout**
+
+```Ruby
+calculations.stdout
+# => Returns the raw output of stdout being written at the runtime.
+```
+
+**#warnings**
+
+```Ruby
+calculations.warnings
+# => Returns the warnings returned by the script.
+```
+
+**#source**
+
+```Ruby
+calculations.source
+# => Returns the source of the script.
+```
+
+**#console**
+
+```Ruby
+calculations.console
+# => Returns the output from R-console.
+```
+
+**#info**
+
+```Ruby
+calculations.info
+# => Returns information about R-environment of the script.
+```
 
 ## Contributing
 
