@@ -55,10 +55,10 @@ the same arguments as `#execute`.
 calculations = client.prepare :animation, 'flip.coin'
 ```
 
-`calculations` variable now holds the calculations that OpenCPU returned to us.
-
-Which of the following methods are available depends on the response from the
-package.
+`calculations` variable now holds the reference URL's to the calculations made
+by OpenCPU. These URL are available through one of the following methods. Which
+of them are available depends on the package and possible response it can
+generate.
 
 **#graphics(obj, type)**
 
