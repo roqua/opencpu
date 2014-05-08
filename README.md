@@ -20,13 +20,23 @@ Or install it yourself as:
     
 ## Configuration
 
-    
+```Ruby
+OpenCPU.configure do |config|
+  config.endpoint_url = 'https://public.opencpu.org/ocpu'
+end
+```    
 
 ## Usage
 
-    client = OpenCPU.client
+```Ruby
+client = OpenCPU.client
+```
 
 ### One-step call
+
+One-step call always returns a JSON result from OpenCPU. However this is a preferred way to use this gem, not every R-package supports one-step responses.
+
+To get a response just pass a package name, function and the payload to the function. In the following example `:digest` is an R-package name, `:hmac` is a function and `{ key: 'foo', object: 'bar' }` is the payload:
 
 ```Ruby
 client.execute :digest, :hmac, { key: 'foo', object: 'bar' }
@@ -97,6 +107,22 @@ calculations.console
 calculations.info
 # => Returns information about R-environment of the script.
 ```
+
+## Test mode
+
+OpenCPU gem provides a test mode. Basically test mode disables all HTTP interaction with provided OpenCPU server. It is very handy when testing your software for example. You can easily turn it on:
+
+```Ruby
+OpenCPU.enable_test_mode!
+```
+
+After that you can set fake responses per package/script combination:
+
+```Ruby
+OpenCPU.set_fake_response! :digest, :hmac, 'foo'
+```
+
+This will allways return `'foo'` when calling function `hmac` in package `digest`.
 
 ## Contributing
 
