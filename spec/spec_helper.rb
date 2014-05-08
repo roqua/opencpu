@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require 'vcr'
 
 require File.expand_path('../lib/opencpu.rb', __dir__)
