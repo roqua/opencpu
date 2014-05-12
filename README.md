@@ -118,6 +118,9 @@ calculations.info
 
 ## Test mode
 
+**NOTE:** Test mode is only supported in combination with `#execute` and the
+first step (`#prepare`) in two-step call.
+
 OpenCPU gem provides a test mode. It basically disables all HTTP interactions
 with provided OpenCPU server. It is very handy when testing your software for
 example. You can easily turn it on:
