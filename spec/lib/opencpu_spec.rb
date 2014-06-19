@@ -25,12 +25,12 @@ describe OpenCPU do
   describe '#configure' do
     before do
       described_class.configure do |config|
-        config.endpoint_url = 'http://somehost.com/opencpu'
+        config.endpoint_url = 'http://example.com/opencpu'
       end
     end
 
     it "can configure" do
-      expect(described_class.configuration.endpoint_url).to eq 'http://somehost.com/opencpu'
+      expect(described_class.configuration.endpoint_url).to eq 'http://example.com/opencpu'
     end
   end
 
@@ -53,9 +53,9 @@ describe OpenCPU do
 
     it 'checks for a test mode' do
       described_class.enable_test_mode!
-      expect(described_class.test_mode?).to be_true
+      expect(described_class.test_mode?).to eq true
       described_class.disable_test_mode!
-      expect(described_class.test_mode?).to be_false
+      expect(described_class.test_mode?).to eq false
     end
 
     it 'can set a fake response' do
