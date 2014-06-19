@@ -75,6 +75,22 @@ describe OpenCPU::Client do
       end
     end
 
+    context 'user packages' do
+      before do
+        OpenCPU.configure do |config|
+          config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+        end
+      end
+      let(:client) { described_class.new }
+
+      it "can access user packages" do
+        VCR.use_cassette :user_digest_hmac, record: :new_episodes do
+          response = client.execute(:digest, :hmac, data: { key: 'foo', object: 'bar' }, user: 'deploy')
+          expect(response).to eq ["0c7a250281315ab863549f66cd8a3a53"]
+        end
+      end
+    end
+
     context 'when in test mode' do
       it 'has an empty fake response when just enabled' do
         OpenCPU.enable_test_mode!
