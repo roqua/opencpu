@@ -6,17 +6,13 @@ module OpenCPU
       self.class.base_uri OpenCPU.configuration.endpoint_url
     end
 
-    def execute(package, function, params = {})
-      data = params.fetch(:data, {})
-      user = params.fetch(:user, :system)
+    def execute(package, function, user: :system, data: {})
       process_query package_url(package, function, user, :json), data do |response|
         JSON.parse(response.body)
       end
     end
 
-    def prepare(package, function, params = {})
-      data = params.fetch(:data, {})
-      user = params.fetch(:user, :system)
+    def prepare(package, function, user: :system, data: {})
       process_query package_url(package, function, user), data do |response|
         location  = response.headers['location']
         resources = response.body.split(/\n/)
