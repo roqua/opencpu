@@ -34,7 +34,7 @@ describe OpenCPU::Client do
 
   describe '#prepare' do
     let(:client) { described_class.new }
-    let(:delayed_calculation) { client.prepare('digest', 'hmac', key: "baz", object: "qux") }
+    let(:delayed_calculation) { client.prepare('digest', 'hmac', data: { key: "baz", object: "qux" }) }
 
     it 'returns a DelayedCalculation' do
       VCR.use_cassette :prepare do
@@ -64,7 +64,7 @@ describe OpenCPU::Client do
 
     it 'accepts R-function parameters as data' do
       VCR.use_cassette :digest_hmac, record: :new_episodes do
-        response = client.execute(:digest, :hmac, key: 'baz', object: 'qux')
+        response = client.execute(:digest, :hmac, data: { key: 'baz', object: 'qux' })
         expect(response).to eq ["22e2a7a268bf076801eefe7cd0119bb9"]
       end
     end
@@ -75,10 +75,26 @@ describe OpenCPU::Client do
       end
     end
 
+    context 'user packages' do
+      before do
+        OpenCPU.configure do |config|
+          config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+        end
+      end
+      let(:client) { described_class.new }
+
+      it "can access user packages" do
+        VCR.use_cassette :user_digest_hmac, record: :new_episodes do
+          response = client.execute(:digest, :hmac, user: 'deploy', data: { key: 'foo', object: 'bar' })
+          expect(response).to eq ["0c7a250281315ab863549f66cd8a3a53"]
+        end
+      end
+    end
+
     context 'when in test mode' do
       it 'has an empty fake response when just enabled' do
         OpenCPU.enable_test_mode!
-        response = client.execute(:digest, :hmac, key: 'baz', object: 'qux')
+        response = client.execute(:digest, :hmac, data: { key: 'baz', object: 'qux' })
         expect(response).to be_nil
       end
 
