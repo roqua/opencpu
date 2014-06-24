@@ -37,22 +37,45 @@ client = OpenCPU.client
 
 ### One-step call
 
-One-step call always returns a JSON result from OpenCPU. However this is a
-preferred way to use this gem, not every R-package supports one-step responses.
+One-step call always returns a JSON result from OpenCPU. This is a preferred
+way to use this gem, but keep in mind that not every R-package supports one-step
+responses. On OpenCPU server, packages can be installed under the system, but
+also under a particular user. This gem also provides a way to access both of them.
 
-To get a response just pass a package name, function and the payload to the
-function. In the following example `:digest` is an R-package name, `:hmac` is a
-function and `{ key: 'foo', object: 'bar' }` is the payload:
+**Access System Libraries**
+
+To get a response from the package installed under the system libraries just
+pass the package name, function and input data to the function. In the following
+example `:digest` is an R-package name, `:hmac` is a function and
+`{ key: 'foo', object: 'bar' }` is the input data, where `key` and `object` are
+parameters of `hmac` function:
 
 ```Ruby
-client.execute :digest, :hmac, { key: 'foo', object: 'bar' }
+client.execute :digest, :hmac, data: { key: 'foo', object: 'bar' }
+# => ['0c7a250281315ab863549f66cd8a3a53']
+```
+
+Above example is the same as the following (note the `user` parameter):
+
+```Ruby
+client.execute :digest, :hmac, user: :system, data: { key: 'foo', object: 'bar' }
+# => ['0c7a250281315ab863549f66cd8a3a53']
+```
+
+**Access User Libraries**
+
+To access a package installed under a particular user, just pass `user` parameter
+with the name of the existing user.
+
+```Ruby
+client.execute :digest, :hmac, user: :johndoe, data: { key: 'foo', object: 'bar' }
 # => ['0c7a250281315ab863549f66cd8a3a53']
 ```
 
 ### Two-steps way
 
 To prepare the calculations on OpenCPU execute the `#prepare` method. It accepts
-the same arguments as `#execute`.
+the same arguments as `#execute`, thus: `package`, `function`, `user` and `data`.
 
 ```Ruby
 calculations = client.prepare :animation, 'flip.coin'
@@ -116,7 +139,7 @@ calculations.info
 # => Returns information about R-environment of the script.
 ```
 
-## Test mode
+## Testing
 
 **NOTE:** Test mode is only supported in combination with `#execute` and the
 first step (`#prepare`) in two-step call.
