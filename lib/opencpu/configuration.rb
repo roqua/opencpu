@@ -1,6 +1,7 @@
 module OpenCPU
   class Configuration
     attr_accessor :endpoint_url
+    attr_accessor :timeout
     attr_accessor :username
     attr_accessor :password
     attr_accessor :mode

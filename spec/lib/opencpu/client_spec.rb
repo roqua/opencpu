@@ -21,14 +21,28 @@ describe OpenCPU::Client do
   end
 
   describe 'initializes' do
-    before do
-      OpenCPU.configure do |config|
-        config.endpoint_url = 'https://public.opencpu.org/ocpu'
+
+    describe 'without configured attributes' do
+      it 'uses the default timeout' do
+        expect(described_class.new.class.default_options[:timeout]).to be_nil
       end
     end
 
-    it 'with configured attributes' do
-      expect(described_class.new.class.base_uri).to eq 'https://public.opencpu.org/ocpu'
+    describe 'with configured attributes' do
+      before do
+        OpenCPU.configure do |config|
+          config.endpoint_url = 'https://public.opencpu.org/ocpu'
+          config.timeout      = 123
+        end
+      end
+
+      it 'sets the base uri' do
+        expect(described_class.new.class.base_uri).to eq 'https://public.opencpu.org/ocpu'
+      end
+
+      it 'sets the default_timeout' do
+        expect(described_class.new.class.default_options[:timeout]).to eq 123
+      end
     end
   end
 

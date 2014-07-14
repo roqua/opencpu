@@ -26,6 +26,7 @@ Or install it yourself as:
 ```Ruby
 OpenCPU.configure do |config|
   config.endpoint_url = 'https://public.opencpu.org/ocpu'
+  config.timeout      = 30 # Timeout in seconds
 end
 ```
 
