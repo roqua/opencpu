@@ -4,6 +4,7 @@ module OpenCPU
 
     def initialize
       self.class.base_uri OpenCPU.configuration.endpoint_url
+      self.class.default_timeout OpenCPU.configuration.timeout
     end
 
     def execute(package, function, user: :system, data: {})
