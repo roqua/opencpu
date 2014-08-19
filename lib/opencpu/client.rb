@@ -5,6 +5,9 @@ module OpenCPU
     def initialize
       self.class.base_uri OpenCPU.configuration.endpoint_url
       self.class.default_timeout(OpenCPU.configuration.timeout) unless OpenCPU.configuration.timeout.nil?
+      if OpenCPU.configuration.username && OpenCPU.configuration.password
+        self.class.basic_auth OpenCPU.configuration.username, OpenCPU.configuration.password
+      end
     end
 
     def execute(package, function, user: :system, data: {})
