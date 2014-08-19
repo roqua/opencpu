@@ -72,4 +72,21 @@ describe OpenCPU::Configuration do
       expect(config.fake_responses).to eq({})
     end
   end
+
+  describe "#reset!" do
+    let(:config) do
+      described_class.new.tap do |config|
+        config.endpoint_url = 'http://example.com'
+        config.username = 'foo'
+        config.password = 'bar'
+      end
+    end
+    it "resets already set configuration" do
+      config.reset!
+      expect(config.endpoint_url).to be_nil
+      expect(config.username).to be_nil
+      expect(config.password).to be_nil
+      expect(config.fake_responses).to eq({})
+    end
+  end
 end
