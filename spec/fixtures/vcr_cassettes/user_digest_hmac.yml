@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://staging.opencpu.roqua.nl/ocpu/user/deploy/library/digest/R/hmac/json
+    uri: https://foo:bar@staging.opencpu.roqua.nl/ocpu/user/deploy/library/digest/R/hmac/json
     body:
       encoding: UTF-8
       string: '{"key":"foo","object":"bar"}'

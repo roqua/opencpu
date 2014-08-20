@@ -18,5 +18,14 @@ module OpenCPU
     def remove_fake_response(key)
       @fake_responses.delete key
     end
+
+    def reset!
+      @endpoint_url   = nil
+      @timeout        = nil
+      @username       = nil
+      @password       = nil
+      @mode           = nil
+      @fake_responses = {}
+    end
   end
 end

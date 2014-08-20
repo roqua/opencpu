@@ -14,12 +14,16 @@ describe OpenCPU do
     expect(described_class).to respond_to :configuration
   end
 
-  it "responds to #enable_test_mode" do
+  it "responds to #enable_test_mode!" do
     expect(described_class).to respond_to :enable_test_mode!
   end
 
-  it "responds to #disable_test_mode" do
+  it "responds to #disable_test_mode!" do
     expect(described_class).to respond_to :disable_test_mode!
+  end
+
+  it "responds to #reset_configuration!" do
+    expect(described_class).to respond_to :reset_configuration!
   end
 
   describe '#configure' do
@@ -64,6 +68,18 @@ describe OpenCPU do
       described_class.set_fake_response!('hoi', 'hai')
       expect(OpenCPU.configuration.fake_responses['foo/bar']).to eq({baz: 'qux'})
       expect(OpenCPU.configuration.fake_responses['hoi/hai']).to be_nil
+    end
+  end
+
+  describe 'resetting configuration' do
+    before do
+      described_class.configure do |config|
+        config.endpoint_url = 'http://example.com/opencpu'
+      end
+    end
+    it "can reset configuration" do
+      described_class.reset_configuration!
+      expect(described_class.configuration.endpoint_url).to be_nil
     end
   end
 end

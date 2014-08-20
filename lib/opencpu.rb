@@ -42,6 +42,10 @@ module OpenCPU
     key = [package, script].join('/')
     self.configuration.add_fake_response key, response
   end
+
+  def self.reset_configuration!
+    self.configuration.reset!
+  end
 end
 
 

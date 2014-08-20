@@ -36,11 +36,11 @@ describe OpenCPU::Client do
         end
       end
 
-      it 'sets the base uri' do
+      it 'sets base uri' do
         expect(described_class.new.class.base_uri).to eq 'https://public.opencpu.org/ocpu'
       end
 
-      it 'sets the default_timeout' do
+      it 'sets default_timeout' do
         expect(described_class.new.class.default_options[:timeout]).to eq 123
       end
     end
@@ -70,14 +70,14 @@ describe OpenCPU::Client do
     let(:client) { described_class.new }
 
     it 'is used to quickly return JSON results' do
-      VCR.use_cassette :animation_flip_coin, record: :new_episodes do
+      VCR.use_cassette :animation_flip_coin do
         response = client.execute(:animation, 'flip.coin')
         expect(response).to eq "freq" => [0.56, 0.44], "nmax" => [50]
       end
     end
 
     it 'accepts R-function parameters as data' do
-      VCR.use_cassette :digest_hmac, record: :new_episodes do
+      VCR.use_cassette :digest_hmac do
         response = client.execute(:digest, :hmac, data: { key: 'baz', object: 'qux' })
         expect(response).to eq ["22e2a7a268bf076801eefe7cd0119bb9"]
       end
@@ -93,12 +93,15 @@ describe OpenCPU::Client do
       before do
         OpenCPU.configure do |config|
           config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+          config.username     = 'foo'
+          config.password     = 'bar'
+          config.timeout      = 123
         end
       end
       let(:client) { described_class.new }
 
       it "can access user packages" do
-        VCR.use_cassette :user_digest_hmac, record: :new_episodes do
+        VCR.use_cassette :user_digest_hmac do
           response = client.execute(:digest, :hmac, user: 'deploy', data: { key: 'foo', object: 'bar' })
           expect(response).to eq ["0c7a250281315ab863549f66cd8a3a53"]
         end
@@ -128,5 +131,4 @@ describe OpenCPU::Client do
       end
     end
   end
-
 end
