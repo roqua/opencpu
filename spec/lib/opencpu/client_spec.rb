@@ -131,18 +131,4 @@ describe OpenCPU::Client do
       end
     end
   end
-
-  describe "basic auth" do
-    before do
-      OpenCPU.configure do |config|
-        config.endpoint_url = 'https://public.opencpu.org/ocpu'
-        config.username     = 'foo'
-        config.password     = 'bar'
-      end
-    end
-
-    it 'sets basic authentication' do
-      expect(described_class.new.class.default_options[:basic_auth]).to eq(username: 'foo', password: 'bar')
-    end
-  end
 end

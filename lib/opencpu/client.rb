@@ -5,9 +5,6 @@ module OpenCPU
     def initialize
       self.class.base_uri OpenCPU.configuration.endpoint_url
       self.class.default_timeout(OpenCPU.configuration.timeout) unless OpenCPU.configuration.timeout.nil?
-      if OpenCPU.configuration.username && OpenCPU.configuration.password
-        self.class.basic_auth OpenCPU.configuration.username, OpenCPU.configuration.password
-      end
     end
 
     def execute(package, function, user: :system, data: {})
@@ -28,7 +25,16 @@ module OpenCPU
 
     def process_query(url, data, &block)
       return fake_response_for(url) if OpenCPU.test_mode?
-      options   = { body: data.to_json, headers: { "Content-Type" => 'application/json' } }
+      options   = {
+        body: data.to_json,
+        headers: {"Content-Type" => 'application/json'}
+      }
+
+      if OpenCPU.configuration.username && OpenCPU.configuration.password
+        options[:basic_auth] = {
+          username: OpenCPU.configuration.username, password: OpenCPU.configuration.password
+        }
+      end
       response  = self.class.post(url, options)
 
       case response.code
