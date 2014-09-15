@@ -1,7 +1,6 @@
 # OpenCPU gem
 
-![Build Status](https://circleci.com/gh/roqua/opencpu.png?circle-token=4689df66bef26cd4aff65a4893c25400795b408a)
-
+[![Build Status](https://circleci.com/gh/roqua/opencpu.svg?style=shield&circle-token=4689df66bef26cd4aff65a4893c25400795b408a)](https://circleci.com/gh/roqua/roqua/tree/master)
 [![Code Climate](https://codeclimate.com/github/roqua/opencpu.png)](https://codeclimate.com/github/roqua/opencpu)
 [![Dependency Status](https://gemnasium.com/roqua/opencpu.svg)](https://gemnasium.com/roqua/opencpu)
 
