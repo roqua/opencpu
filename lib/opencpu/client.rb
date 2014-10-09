@@ -7,13 +7,17 @@ module OpenCPU
       self.class.default_timeout(OpenCPU.configuration.timeout) unless OpenCPU.configuration.timeout.nil?
     end
 
-    def execute(package, function, user: :system, data: {})
+    def execute(package, function, options = {})
+      user = options.fetch :user, :system
+      data = options.fetch :data, {}
       process_query package_url(package, function, user, :json), data do |response|
         JSON.parse(response.body)
       end
     end
 
-    def prepare(package, function, user: :system, data: {})
+    def prepare(package, function, options = {})
+      user = options.fetch :user, :system
+      data = options.fetch :data, {}
       process_query package_url(package, function, user), data do |response|
         location  = response.headers['location']
         resources = response.body.split(/\n/)
