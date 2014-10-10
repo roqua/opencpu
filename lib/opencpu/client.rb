@@ -1,6 +1,6 @@
 module OpenCPU
   class Client
-    include HTTParty
+    include HTTMultiParty
 
     def initialize
       self.class.base_uri OpenCPU.configuration.endpoint_url
@@ -30,8 +30,9 @@ module OpenCPU
     def process_query(url, data, &block)
       return fake_response_for(url) if OpenCPU.test_mode?
       options   = {
-        body: data.to_json,
-        headers: {"Content-Type" => 'application/json'}
+        body: data,
+        headers: {"Content-Type" => 'application/json'},
+        verify: false
       }
 
       if OpenCPU.configuration.username && OpenCPU.configuration.password

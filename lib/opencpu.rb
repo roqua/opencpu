@@ -1,4 +1,4 @@
-require 'httparty'
+require 'httmultiparty'
 require 'yajl'
 
 begin
