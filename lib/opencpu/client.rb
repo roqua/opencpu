@@ -37,7 +37,7 @@ module OpenCPU
 
       return fake_response_for(url) if OpenCPU.test_mode?
       options   = {
-        body: data.to_json,
+        body: data,
         headers: {"Content-Type" => 'application/json'}
       }
 
