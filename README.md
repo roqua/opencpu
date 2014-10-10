@@ -140,6 +140,16 @@ calculations.info
 # => Returns information about R-environment of the script.
 ```
 
+### Additional features
+
+**Multipart requests with files**
+
+If you want to send one or more files along, you can pass in a File object as data:
+
+```Ruby
+client.execute :foo, :bar, user: :johndoe, data: {file: File.new('/tmp/test.foo')}
+```
+
 ## Testing
 
 **NOTE:** Test mode is only supported in combination with `#execute` and the
