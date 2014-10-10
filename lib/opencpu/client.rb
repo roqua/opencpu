@@ -28,6 +28,13 @@ module OpenCPU
     private
 
     def process_query(url, data, &block)
+
+      puts 'url'
+      puts url.to_yaml
+
+      puts 'data'
+      puts data.to_yaml
+
       return fake_response_for(url) if OpenCPU.test_mode?
       options   = {
         body: data.to_json,
@@ -39,6 +46,16 @@ module OpenCPU
           username: OpenCPU.configuration.username, password: OpenCPU.configuration.password
         }
       end
+
+
+      puts 'RRRR'
+      puts 'url'
+      puts url
+
+      puts 'options'
+      puts options
+      puts 'RRRR'
+
       response  = self.class.post(url, options)
 
       case response.code
