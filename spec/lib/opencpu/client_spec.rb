@@ -8,8 +8,8 @@ describe OpenCPU::Client do
     end
   end
 
-  it 'initializes with HTTParty' do
-    expect(described_class.ancestors).to include HTTParty
+  it 'initializes with HTTMultiParty' do
+    expect(described_class.ancestors).to include HTTMultiParty
   end
 
   it 'defines #execute' do

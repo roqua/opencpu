@@ -3,7 +3,7 @@ module OpenCPU
   class ResponseNotAvailableError < StandardError; end
   
   class DelayedCalculation
-    include HTTParty
+    include HTTMultiParty
 
     attr_accessor :location
     attr_accessor :available_resources

@@ -1,6 +1,6 @@
 module OpenCPU
   class Client
-    include HTTParty
+    include HTTMultiParty
 
     def initialize
       self.class.base_uri OpenCPU.configuration.endpoint_url
