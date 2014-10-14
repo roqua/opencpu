@@ -8,9 +8,10 @@ module OpenCPU
     end
 
     def execute(package, function, options = {})
-      user = options.fetch :user, :system
-      data = options.fetch :data, {}
-      process_query package_url(package, function, user, :json), data do |response|
+      user   = options.fetch :user, :system
+      data   = options.fetch :data, {}
+      format = options.fetch :format, :json
+      process_query package_url(package, function, user, :json), data, format do |response|
         JSON.parse(response.body)
       end
     end
@@ -18,7 +19,8 @@ module OpenCPU
     def prepare(package, function, options = {})
       user = options.fetch :user, :system
       data = options.fetch :data, {}
-      process_query package_url(package, function, user), data do |response|
+      format = options.fetch :format, :json
+      process_query package_url(package, function, user), data, format do |response|
         location  = response.headers['location']
         resources = response.body.split(/\n/)
         OpenCPU::DelayedCalculation.new(location, resources)
@@ -27,10 +29,10 @@ module OpenCPU
 
     private
 
-    def process_query(url, data, &block)
+    def process_query(url, data, format, &block)
       return fake_response_for(url) if OpenCPU.test_mode?
 
-      response  = self.class.post(url, request_options(data))
+      response  = self.class.post(url, request_options(data, format))
 
       case response.code
       when 200..201
@@ -42,12 +44,19 @@ module OpenCPU
       end
     end
 
-    def request_options(data)
-      options   = {
-        body: data.to_json,
-        headers: {"Content-Type" => 'application/json'},
+    def request_options(data, format)
+      options = {
         verify: OpenCPU.configuration.verify_ssl
       }
+
+      case format
+      when :json
+        options[:body] = data.to_json
+        options[:headers] =  {"Content-Type" => 'application/json'}
+      else
+        options[:query] = data
+      end
+
       if OpenCPU.configuration.username && OpenCPU.configuration.password
         options[:basic_auth] = {
           username: OpenCPU.configuration.username, password: OpenCPU.configuration.password

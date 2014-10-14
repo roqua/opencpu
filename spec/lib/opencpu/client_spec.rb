@@ -89,6 +89,33 @@ describe OpenCPU::Client do
       end
     end
 
+    context 'url encoded request' do
+      it 'sends the parameters url_encoded' do
+        VCR.use_cassette :url_encoded_request do |cassette|
+          response = client.execute(:base, :identity, format: nil, data: { x: 'data.frame(x=1,y=1)' })
+          params = cassette.serializable_hash['http_interactions'][0]['request']['body']['string']
+          expect(params).to eq "x=data.frame(x%3D1%2Cy%3D1)"
+        end
+      end
+      it 'accepts R-code as parameters' do
+        VCR.use_cassette :url_encoded_request do |cassette|
+          response = client.execute(:base, :identity, format: nil, data: { x: 'data.frame(x=1,y=1)' })
+          expect(response).to eq [{"x"=>1, "y"=>1}]
+        end
+      end
+    end
+
+    context 'multipart form / file uploads' do
+      it "works" do
+        skip
+        VCR.use_cassette :multi_part_request do |cassette|
+          puts File.new('spec/fixtures/test.csv').read
+          response = client.execute(:utils, 'read.csv', format: nil, data: { file: File.new('spec/fixtures/test.csv') })
+          expect(response).to eq [{"x"=>1, "y"=>1}]
+        end
+      end
+    end
+
     context 'user packages' do
       before do
         OpenCPU.configure do |config|
