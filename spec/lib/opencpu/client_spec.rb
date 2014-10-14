@@ -58,7 +58,7 @@ describe OpenCPU::Client do
 
     it 'returns a DelayedCalculation with correct path' do
       VCR.use_cassette :prepare do
-        expect(delayed_calculation.location).to eq "https://public.opencpu.org/ocpu/tmp/x0a79915480/"
+        expect(delayed_calculation.location).to match "https://public.opencpu.org/ocpu/tmp/x[0-9a-f]+/"
       end
     end
   end
@@ -70,9 +70,9 @@ describe OpenCPU::Client do
     let(:client) { described_class.new }
 
     it 'is used to quickly return JSON results' do
-      VCR.use_cassette :animation_flip_coin do
+      VCR.use_cassette :animation_flip_coin, record: :new_episodes do
         response = client.execute(:animation, 'flip.coin')
-        expect(response).to eq "freq" => [0.56, 0.44], "nmax" => [50]
+        expect(response).to include('freq', 'nmax')
       end
     end
 
@@ -98,6 +98,7 @@ describe OpenCPU::Client do
           config.timeout      = 123
         end
       end
+      after { OpenCPU.reset_configuration! }
       let(:client) { described_class.new }
 
       it "can access user packages" do
@@ -134,11 +135,11 @@ describe OpenCPU::Client do
 
   describe '#request_options' do
     it 'uses verify_ssl setting' do
-      expect(described_class.new.send(:request_options, {})[:verify]).to be_truthy
+      expect(described_class.new.send(:request_options, {}, nil)[:verify]).to be_truthy
       OpenCPU.configure do |config|
         config.verify_ssl = false
       end
-      expect(described_class.new.send(:request_options, {})[:verify]).to be_falsy
+      expect(described_class.new.send(:request_options, {}, nil)[:verify]).to be_falsy
     end
   end
 end

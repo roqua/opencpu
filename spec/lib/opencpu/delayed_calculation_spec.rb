@@ -29,43 +29,31 @@ describe OpenCPU::DelayedCalculation do
   end
 
   let(:location) { "https://public.opencpu.org/ocpu/tmp/x09dd995a16/" }
-  let(:resources) do
-    [
-      "/ocpu/tmp/x09dd995a16/R/.val",
-      "/ocpu/tmp/x09dd995a16/graphics/1",
-      "/ocpu/tmp/x09dd995a16/graphics/2",
-      "/ocpu/tmp/x09dd995a16/graphics/3",
-      "/ocpu/tmp/x09dd995a16/graphics/4",
-      "/ocpu/tmp/x09dd995a16/source",
-      "/ocpu/tmp/x09dd995a16/console",
-      "/ocpu/tmp/x09dd995a16/info"
-    ]
-  end
-  let(:delayed_calculation) { described_class.new location, resources }
+  let(:delayed_calculation) { OpenCPU::client.prepare('animation', 'flip.coin') }
 
   describe "#graphics" do
 
     it 'defines methods to access graphic functions' do
-      VCR.use_cassette :animation_flip_coin do
+      VCR.use_cassette :animation_flip_coin, record: :new_episodes do
         expect { delayed_calculation.graphics }.not_to raise_error
         expect { delayed_calculation.stdout }.to raise_error OpenCPU::ResponseNotAvailableError
       end
     end
 
     it "returns a SVG by default" do
-      VCR.use_cassette :animation_flip_coin do
+      VCR.use_cassette :animation_flip_coin, record: :new_episodes do
         expect(delayed_calculation.graphics).to include 'svg xmlns'
       end
     end
 
     it "can return a PNG" do
-      VCR.use_cassette :animation_flip_coin do
+      VCR.use_cassette :animation_flip_coin, record: :new_episodes do
         expect(delayed_calculation.graphics(0, :png)).to include 'PNG'
       end
     end
 
     it "does not support formats except PNG and SVG" do
-      VCR.use_cassette :animation_flip_coin do
+      VCR.use_cassette :animation_flip_coin, record: :new_episodes do
         expect { delayed_calculation.graphics(0, :svg) }.not_to raise_error
         expect { delayed_calculation.graphics(0, :png) }.not_to raise_error
         expect { delayed_calculation.graphics(0, :foo) }.to raise_error OpenCPU::UnsupportedFormatError
@@ -81,15 +69,15 @@ describe OpenCPU::DelayedCalculation do
   describe 'standard getters' do
     describe '#value' do
       it "returns raw R calculation result" do
-        VCR.use_cassette :animation_flip_coin do
-          expect(delayed_calculation.value).to eq "$freq\n   1    2 \n0.52 0.48 \n\n$nmax\n[1] 50"
+        VCR.use_cassette :animation_flip_coin, record: :new_episodes do
+          expect(delayed_calculation.value).to include "$freq"
         end
       end
     end
 
     describe '#stdout' do
       it "returns cached stdout" do
-        VCR.use_cassette :animation_flip_coin do
+        VCR.use_cassette :animation_flip_coin, record: :new_episodes do
           expect { delayed_calculation.stdout }.to raise_error OpenCPU::ResponseNotAvailableError
         end
       end
@@ -97,7 +85,7 @@ describe OpenCPU::DelayedCalculation do
 
     describe '#warnings' do
       it 'returns cached warnings' do
-        VCR.use_cassette :animation_flip_coin do
+        VCR.use_cassette :animation_flip_coin, record: :new_episodes do
           expect { delayed_calculation.warnings }.to raise_error OpenCPU::ResponseNotAvailableError
         end
       end
@@ -105,7 +93,7 @@ describe OpenCPU::DelayedCalculation do
 
     describe '#info' do
       it 'returns cached info' do
-        VCR.use_cassette :animation_flip_coin do
+        VCR.use_cassette :animation_flip_coin, record: :new_episodes do
           expect(delayed_calculation.info).to include("R version")
         end
       end
