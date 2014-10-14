@@ -30,7 +30,7 @@ module OpenCPU
     def process_query(url, data, &block)
       return fake_response_for(url) if OpenCPU.test_mode?
       options   = {
-        body: data,
+        body: data.to_json,
         headers: {"Content-Type" => 'application/json'},
         verify: false
       }

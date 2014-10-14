@@ -1,4 +1,8 @@
-# 0.7.7
+# 0.7.8
+
+* Fixed gem by forcing json again (will add format option in 0.8)
+
+# 0.7.7 Broken! Do not use!
 
 * Added support for multipart requests [@amaunz]
 
