@@ -29,18 +29,8 @@ module OpenCPU
 
     def process_query(url, data, &block)
       return fake_response_for(url) if OpenCPU.test_mode?
-      options   = {
-        body: data.to_json,
-        headers: {"Content-Type" => 'application/json'},
-        verify: false
-      }
 
-      if OpenCPU.configuration.username && OpenCPU.configuration.password
-        options[:basic_auth] = {
-          username: OpenCPU.configuration.username, password: OpenCPU.configuration.password
-        }
-      end
-      response  = self.class.post(url, options)
+      response  = self.class.post(url, request_options(data))
 
       case response.code
       when 200..201
@@ -50,6 +40,20 @@ module OpenCPU
       else
         raise 'Error'
       end
+    end
+
+    def request_options(data)
+      options   = {
+        body: data.to_json,
+        headers: {"Content-Type" => 'application/json'},
+        verify: OpenCPU.configuration.verify_ssl
+      }
+      if OpenCPU.configuration.username && OpenCPU.configuration.password
+        options[:basic_auth] = {
+          username: OpenCPU.configuration.username, password: OpenCPU.configuration.password
+        }
+      end
+      options
     end
 
     def package_url(package, function, user = :system, format = nil)

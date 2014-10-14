@@ -131,4 +131,14 @@ describe OpenCPU::Client do
       end
     end
   end
+
+  describe '#request_options' do
+    it 'uses verify_ssl setting' do
+      expect(described_class.new.send(:request_options, {})[:verify]).to be_truthy
+      OpenCPU.configure do |config|
+        config.verify_ssl = false
+      end
+      expect(described_class.new.send(:request_options, {})[:verify]).to be_falsy
+    end
+  end
 end
