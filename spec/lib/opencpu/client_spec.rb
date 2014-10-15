@@ -107,11 +107,14 @@ describe OpenCPU::Client do
 
     context 'multipart form / file uploads' do
       it "works" do
-        skip
+        skip # vcr is broken for file uploads https://github.com/vcr/vcr/issues/441
         VCR.use_cassette :multi_part_request do |cassette|
-          puts File.new('spec/fixtures/test.csv').read
+          # VCR.turn_off!
+          # WebMock.disable!
           response = client.execute(:utils, 'read.csv', format: nil, data: { file: File.new('spec/fixtures/test.csv') })
-          expect(response).to eq [{"x"=>1, "y"=>1}]
+          # WebMock.enable!
+          # VCR.turn_on!
+          expect(response).to eq [{"head1"=>1, "head2"=>2, "head3"=>3}, {"head1"=>4, "head2"=>5, "head3"=>6}]
         end
       end
     end

@@ -27,6 +27,7 @@ Or install it yourself as:
 OpenCPU.configure do |config|
   config.endpoint_url = 'https://public.opencpu.org/ocpu'
   config.timeout      = 30 # Timeout in seconds
+  config.verify_ssl   = true # set to false for opencpu server with self-signed certificates.
 end
 ```
 
@@ -34,6 +35,16 @@ end
 
 ```Ruby
 client = OpenCPU.client
+```
+
+### Formats
+
+By default we send data using the json format. This format is efficient and safe, but only supports strings and numeric parameters (see [opencpu page](https://www.opencpu.org/api.html#api-arguments))
+
+If you want to send R code argument, you'll need to specify format: :urlencoded in your request. Note that you need to enclose your string parameters in quotes in that case, since they will be seen as variables otherwise:
+
+```Ruby
+client.execute :digest, :hmac, data: { key: "'foo'", object: "'bar'"" }, format: :urlencoded
 ```
 
 ### One-step call
@@ -144,10 +155,10 @@ calculations.info
 
 **Multipart requests with files**
 
-If you want to send one or more files along, you can pass in a File object as data:
+If you want to send one or more files along, you can pass in a File object as data, but only when using the urlencoded format.
 
 ```Ruby
-client.execute :foo, :bar, user: :johndoe, data: {file: File.new('/tmp/test.foo')}
+client.execute :foo, :bar, user: :johndoe, data: {file: File.new('/tmp/test.foo')}, format: :urlencoded
 ```
 
 ## Testing

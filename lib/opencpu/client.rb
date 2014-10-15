@@ -53,7 +53,7 @@ module OpenCPU
       when :json
         options[:body] = data.to_json
         options[:headers] =  {"Content-Type" => 'application/json'}
-      else
+      when :urlencoded
         options[:query] = data
       end
 
