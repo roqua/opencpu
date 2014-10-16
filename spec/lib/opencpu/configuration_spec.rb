@@ -89,4 +89,16 @@ describe OpenCPU::Configuration do
       expect(config.fake_responses).to eq({})
     end
   end
+
+  describe "#verify_ssl" do
+    let(:config) { described_class.new }
+    it "defaults to true" do
+      expect(config.verify_ssl).to be_truthy
+    end
+
+    it 'can be changed' do
+      config.verify_ssl = false
+      expect(config.verify_ssl).to be_falsy
+    end
+  end
 end

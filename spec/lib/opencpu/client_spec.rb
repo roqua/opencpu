@@ -58,7 +58,7 @@ describe OpenCPU::Client do
 
     it 'returns a DelayedCalculation with correct path' do
       VCR.use_cassette :prepare do
-        expect(delayed_calculation.location).to eq "https://public.opencpu.org/ocpu/tmp/x0a79915480/"
+        expect(delayed_calculation.location).to match "https://public.opencpu.org/ocpu/tmp/x[0-9a-f]+/"
       end
     end
   end
@@ -70,9 +70,9 @@ describe OpenCPU::Client do
     let(:client) { described_class.new }
 
     it 'is used to quickly return JSON results' do
-      VCR.use_cassette :animation_flip_coin do
+      VCR.use_cassette :animation_flip_coin, record: :new_episodes do
         response = client.execute(:animation, 'flip.coin')
-        expect(response).to eq "freq" => [0.56, 0.44], "nmax" => [50]
+        expect(response).to include('freq', 'nmax')
       end
     end
 
@@ -89,6 +89,36 @@ describe OpenCPU::Client do
       end
     end
 
+    context 'url encoded request' do
+      it 'sends the parameters url_encoded' do
+        VCR.use_cassette :url_encoded_request do |cassette|
+          response = client.execute(:base, :identity, format: nil, data: { x: 'data.frame(x=1,y=1)' })
+          params = cassette.serializable_hash['http_interactions'][0]['request']['body']['string']
+          expect(params).to eq "x=data.frame(x%3D1%2Cy%3D1)"
+        end
+      end
+      it 'accepts R-code as parameters' do
+        VCR.use_cassette :url_encoded_request do |cassette|
+          response = client.execute(:base, :identity, format: nil, data: { x: 'data.frame(x=1,y=1)' })
+          expect(response).to eq [{"x"=>1, "y"=>1}]
+        end
+      end
+    end
+
+    context 'multipart form / file uploads' do
+      it "works" do
+        skip # vcr is broken for file uploads https://github.com/vcr/vcr/issues/441
+        VCR.use_cassette :multi_part_request do |cassette|
+          # VCR.turn_off!
+          # WebMock.disable!
+          response = client.execute(:utils, 'read.csv', format: nil, data: { file: File.new('spec/fixtures/test.csv') })
+          # WebMock.enable!
+          # VCR.turn_on!
+          expect(response).to eq [{"head1"=>1, "head2"=>2, "head3"=>3}, {"head1"=>4, "head2"=>5, "head3"=>6}]
+        end
+      end
+    end
+
     context 'user packages' do
       before do
         OpenCPU.configure do |config|
@@ -98,6 +128,7 @@ describe OpenCPU::Client do
           config.timeout      = 123
         end
       end
+      after { OpenCPU.reset_configuration! }
       let(:client) { described_class.new }
 
       it "can access user packages" do
@@ -129,6 +160,16 @@ describe OpenCPU::Client do
           expect(client.execute(:animation, 'flip.test')).to eq({response: 3})
         end
       end
+    end
+  end
+
+  describe '#request_options' do
+    it 'uses verify_ssl setting' do
+      expect(described_class.new.send(:request_options, {}, nil)[:verify]).to be_truthy
+      OpenCPU.configure do |config|
+        config.verify_ssl = false
+      end
+      expect(described_class.new.send(:request_options, {}, nil)[:verify]).to be_falsy
     end
   end
 end

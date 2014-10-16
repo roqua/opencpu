@@ -6,9 +6,11 @@ module OpenCPU
     attr_accessor :password
     attr_accessor :mode
     attr_accessor :fake_responses
+    attr_accessor :verify_ssl
 
     def initialize
       @fake_responses = {}
+      @verify_ssl     = true
     end
 
     def add_fake_response(key, response)
@@ -25,6 +27,7 @@ module OpenCPU
       @username       = nil
       @password       = nil
       @mode           = nil
+      @verify_ssl     = true
       @fake_responses = {}
     end
   end

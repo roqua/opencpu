@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://public.opencpu.org/ocpu/library/base/R/identity/json
+    body:
+      encoding: UTF-8
+      string: x=data.frame(x%3D1%2Cy%3D1)
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Tue, 14 Oct 2014 19:01:39 GMT
+      Content-Type:
+      - application/json
+      Location:
+      - https://public.opencpu.org/ocpu/tmp/x0c19f32080/
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=300, public
+      X-Ocpu-Session:
+      - x0c19f32080
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Accept-Encoding, Cache-Control
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      X-Ocpu-R:
+      - R version 3.1.1 (2014-07-10)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2014-10-14 12:01:39 PDT
+      X-Ocpu-Version:
+      - 1.4.4
+      X-Ocpu-Server:
+      - rApache
+      X-Ocpu-Cache:
+      - MISS
+    body:
+      encoding: UTF-8
+      string: |+
+        [
+            {
+                "x": 1,
+                "y": 1
+            }
+        ]
+
+    http_version: 
+  recorded_at: Tue, 14 Oct 2014 19:01:39 GMT
+recorded_with: VCR 2.9.3
