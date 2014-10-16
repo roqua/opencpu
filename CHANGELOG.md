@@ -1,6 +1,6 @@
 # 0.8.0
 
-* verify ssl of opencpu server by default again.
+* BREAKING CHANGE: verify ssl of opencpu server by default again.
 * Added configuration option verify_ssl so you can disable it.
 * Added format: :urlencoded for sending R-code and file parameters.
 
