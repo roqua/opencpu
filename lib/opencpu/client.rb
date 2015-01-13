@@ -38,9 +38,9 @@ module OpenCPU
       when 200..201
         return yield(response)
       when 400
-        raise '400: Bad Request\n' + response.body
+        fail '400: Bad Request\n' + response.body
       else
-        raise 'Error'
+        fail "#{response.code}:\n #{response.body}"
       end
     end
 
