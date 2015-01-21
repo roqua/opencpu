@@ -1,3 +1,7 @@
+# 0.8.1
+
+* Better error messages
+
 # 0.8.0
 
 * BREAKING CHANGE: verify ssl of opencpu server by default again.
