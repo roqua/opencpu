@@ -74,7 +74,7 @@ module OpenCPU
 
     def domain
       uri = URI.parse(@location)
-      "#{uri.scheme}://#{uri.host}"
+      "#{uri.scheme}://#{uri.host}:#{uri.port}"
     end
 
     def key(uri, location)
