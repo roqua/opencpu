@@ -11,7 +11,8 @@ module OpenCPU
       user   = options.fetch :user, :system
       data   = options.fetch :data, {}
       format = options.fetch :format, :json
-      process_query package_url(package, function, user, :json), data, format do |response|
+      github_remote = options.fetch :github_remote, false
+      process_query package_url(package, function, user, github_remote, :json), data, format do |response|
         JSON.parse(response.body)
       end
     end
@@ -20,7 +21,8 @@ module OpenCPU
       user = options.fetch :user, :system
       data = options.fetch :data, {}
       format = options.fetch :format, :json
-      process_query package_url(package, function, user), data, format do |response|
+      github_remote = options.fetch :github_remote, false
+      process_query package_url(package, function, user, github_remote), data, format do |response|
         location  = response.headers['location']
         resources = response.body.split(/\n/)
         OpenCPU::DelayedCalculation.new(location, resources)
@@ -65,8 +67,9 @@ module OpenCPU
       options
     end
 
-    def package_url(package, function, user = :system, format = nil)
+    def package_url(package, function, user = :system, github_remote = false, format = nil)
       return ['', 'library', package, 'R', function, format.to_s].join('/') if user == :system
+      return ['', 'github', user, package, 'R', function, format.to_s].join('/') if github_remote
       return ['', 'user', user, 'library', package, 'R', function, format.to_s].join('/')
     end
 
