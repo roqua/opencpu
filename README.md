@@ -183,6 +183,11 @@ OpenCPU.set_fake_response! :digest, :hmac, 'foo'
 This will allways return `'foo'` when calling function `hmac` in package
 `digest`.
 
+## Maintainers
+
+* [Henk van der Veen](@hampei)
+* [Ivan Malykh](@ivdma)
+
 ## Contributing
 
 1. Fork it ( http://github.com/roqua/opencpu/fork )
