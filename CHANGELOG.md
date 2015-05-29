@@ -1,3 +1,7 @@
+# 0.8.2
+
+* Added uri.port 
+
 # 0.8.1
 
 * Better error messages
