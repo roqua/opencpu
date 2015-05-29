@@ -185,8 +185,8 @@ This will allways return `'foo'` when calling function `hmac` in package
 
 ## Maintainers
 
-* [Henk van der Veen](@hampei)
-* [Ivan Malykh](@ivdma)
+* [Henk van der Veen](https://twitter.com/hampei)
+* [Ivan Malykh](https://twitter.com/ivdma)
 
 ## Contributing
 
