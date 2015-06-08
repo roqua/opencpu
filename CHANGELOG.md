@@ -1,3 +1,7 @@
+# 0.9.0
+
+* Added support for Github R repos through OpenCPU
+
 # 0.8.2
 
 * Added uri.port 

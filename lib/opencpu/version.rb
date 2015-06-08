@@ -1,6 +1,6 @@
 module OpenCPU
   MAJOR = 0
-  MINOR = 8
-  TINY  = 2
+  MINOR = 9
+  TINY  = 0
   VERSION = [MAJOR, MINOR, TINY].join('.')
 end
