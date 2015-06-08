@@ -151,7 +151,9 @@ describe OpenCPU::Client do
       it "can access github packages" do
         VCR.use_cassette :github_animation_flip_coin do
           response = client.execute(:animation, :'flip.coin', {user: "yihui", github_remote: true, data: {}})
-          expect(response).to eq('freq' => [0.34, 0.66], 'nmax' => [50])
+          expect(response['nmax']).to eq [50]
+          expect(response['freq'][0]).to satisfy { |result| result >= 0.0 && result <= 1.0 }
+          expect(response['freq'][1]).to satisfy { |result| result >= 0.0 && result <= 1.0 }
         end
       end
 
