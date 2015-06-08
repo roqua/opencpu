@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://public.opencpu.org/ocpu/github/yihui/animation/R/flip.coin/json
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Mon, 08 Jun 2015 13:15:43 GMT
+      Content-Type:
+      - application/json
+      Location:
+      - https://public.opencpu.org/ocpu/tmp/x028f930180/
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=300, public
+      X-Ocpu-Session:
+      - x028f930180
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Accept-Encoding, Cache-Control, Authorization
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Ocpu-R:
+      - R version 3.2.0 Patched (2015-05-24 r68404)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2015-06-08 06:15:04 PDT
+      X-Ocpu-Version:
+      - 1.5.0
+      X-Ocpu-Server:
+      - rApache
+      Vary:
+      - Accept-Encoding
+      X-Ocpu-Cache:
+      - HIT
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "freq": [0.34, 0.66],
+          "nmax": [50]
+        }
+    http_version: 
+  recorded_at: Mon, 08 Jun 2015 13:15:43 GMT
+recorded_with: VCR 2.9.3
