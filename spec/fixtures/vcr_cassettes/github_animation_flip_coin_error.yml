@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://public.opencpu.org/ocpu/github/baz/foo/R/bar/json
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Mon, 08 Jun 2015 13:17:01 GMT
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Accept-Encoding, Cache-Control, Authorization
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Ocpu-R:
+      - R version 3.2.0 Patched (2015-05-24 r68404)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2015-06-08 06:17:01 PDT
+      X-Ocpu-Version:
+      - 1.5.0
+      X-Ocpu-Server:
+      - rApache
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: |
+        Package' foo ' did not successfully install.
+        Either installation failed or github repository name does not match package name.
+
+
+        Downloading github repo baz/foo@master
+        Error in download(dest, src, auth) : client error: (404) Not Found
+        Calls: do.call ... remote_download.github_remote -> download -> <Anonymous>
+        Execution halted
+    http_version: 
+  recorded_at: Mon, 08 Jun 2015 13:17:01 GMT
+recorded_with: VCR 2.9.3
