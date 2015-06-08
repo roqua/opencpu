@@ -157,13 +157,9 @@ describe OpenCPU::Client do
 
       it "what happens when package is not available on GitHub" do
         VCR.use_cassette :github_animation_flip_coin_error do
-          exception_message = nil
-          begin
-            response = client.execute(:foo, :bar, {user: "baz", github_remote: true})
-          rescue Exception => ex
-            exception_message = ex.message
-          end
-          expect(exception_message).to be_start_with('400: Bad Request')
+          expect {
+            client.execute(:foo, :bar, {user: "baz", github_remote: true})
+          }.to raise_error RuntimeError, /400: Bad Request/
         end
       end
     end
