@@ -139,6 +139,38 @@ describe OpenCPU::Client do
       end
     end
 
+    context 'GitHub package' do
+      before do
+        OpenCPU.configure do |config|
+          config.endpoint_url = 'https://staging.opencpu.roqua.nl/ocpu'
+          config.username     = 'foo'
+          config.password     = 'bar'
+          config.timeout      = 123
+        end
+      end
+      after { OpenCPU.reset_configuration! }
+      let(:client) { described_class.new }
+ 
+      it "can access github packages" do
+        VCR.use_cassette :github_plyr_mapvalues do
+          response = client.execute(:plyr, :mapvalues, {user: "hadley", github_remote: true, data: { "x" => ['a', 'b', 'c'], "from" => ['a', 'c'] , "to" => ['A', 'C'] }})
+          expect(response).to eq ["A", "b", "C"]
+        end
+      end
+ 
+      it "what happens when package is not available on GitHub" do
+        VCR.use_cassette :github_plyr_mapvalues do
+          exception_message = nil
+          begin
+            response = client.execute(:foobar, :mapvalues, {user: "hadley", github_remote: true, data: { "x" => ['a', 'b', 'c'], "from" => ['a', 'c'] , "to" => ['A', 'C'] }})
+          rescue Exception => ex
+            exception_message = ex.message
+          end
+          expect(exception_messagestart_with?('400: Bad Request'))
+        end
+      end
+    end
+
     context 'when in test mode' do
       it 'has an empty fake response when just enabled' do
         OpenCPU.enable_test_mode!
