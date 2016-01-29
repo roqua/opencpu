@@ -8,16 +8,16 @@ module OpenCPU
     end
 
     def execute(package, function, options = {})
-      user              = options.fetch :user, :system
-      data              = options.fetch :data, {}
-      format            = options.fetch :format, :json
-      github_remote     = options.fetch :github_remote, false
-      convert_na_to_nil = options.fetch :convert_na_to_nil, false
+      user                      = options.fetch :user, :system
+      data                      = options.fetch :data, {}
+      format                    = options.fetch :format, :json
+      github_remote             = options.fetch :github_remote, false
+      should_convert_na_to_nil  = options.fetch :convert_na_to_nil, false
 
       process_query package_url(package, function, user, github_remote, :json), data, format do |response|
-        data =  JSON.parse(response.body)
-        data = convert_na_to_nil(data) if convert_na_to_nil
-        data
+        output =  JSON.parse(response.body)
+        output = convert_na_to_nil(output) if should_convert_na_to_nil
+        output
       end
     end
 
