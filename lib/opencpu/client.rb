@@ -15,7 +15,7 @@ module OpenCPU
       should_convert_na_to_nil  = options.fetch :convert_na_to_nil, false
 
       process_query package_url(package, function, user, github_remote, :json), data, format do |response|
-        output =  JSON.parse(response.body)
+        output = JSON.parse(response.body)
         output = convert_na_to_nil(output) if should_convert_na_to_nil
         output
       end
