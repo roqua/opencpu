@@ -1,3 +1,7 @@
+# 0.9.1
+
+* Added `convert_na_to_nil=true/false` option to Client#execute
+
 # 0.9.0
 
 * Added support for Github R repos through OpenCPU

@@ -105,6 +105,15 @@ describe OpenCPU::Client do
       end
     end
 
+    context 'na_to_nil = true option is given' do
+      it 'converts "na" values to nil' do
+        VCR.use_cassette :response_with_na_values do |cassette|
+          response = client.execute(:base, :identity, format: nil, data: {}, convert_na_to_nil: true)
+          expect(response).to eq [{"x"=>nil, "y"=>"not_na"}]
+        end
+      end
+    end
+
     context 'multipart form / file uploads' do
       it "works" do
         skip # vcr is broken for file uploads https://github.com/vcr/vcr/issues/441
@@ -187,6 +196,25 @@ describe OpenCPU::Client do
           expect(client.execute(:animation, 'flip.test')).to eq({response: 3})
         end
       end
+    end
+  end
+
+  describe "#convert_na_to_nil" do
+    let(:client) { described_class.new }
+
+    it "converts 'NA' values in hashes in arrays" do
+      res = client.convert_na_to_nil([4, {foo: 'NA'}])
+      expect(res[1][:foo]).to be_nil
+    end
+
+    it "converts 'NA' values in arrays in hashes" do
+      res = client.convert_na_to_nil(foo: [1, 'NA'])
+      expect(res[:foo][1]).to be_nil
+    end
+
+    it 'leaves other values alone' do
+      res = client.convert_na_to_nil(foo: [1, 'NOTNA'])
+      expect(res[:foo][1]).to eq 'NOTNA'
     end
   end
 
