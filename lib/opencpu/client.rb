@@ -26,7 +26,7 @@ module OpenCPU
       github_remote = options.fetch :github_remote, false
 
       url = "#{package_url(package, user, github_remote)}/info"
-      self.class.get(url)
+      self.class.get(url, request_options({}, :json))
     end
 
     def convert_na_to_nil(data)
