@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://public.opencpu.org/ocpu/library/ade4/info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Fri, 10 Jun 2016 16:20:39 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=86400, public
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Accept-Encoding, Cache-Control, Authorization
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Ocpu-R:
+      - R version 3.3.0 (2016-05-03)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2016-06-10 09:18:55 PDT
+      X-Ocpu-Version:
+      - 1.6.2
+      X-Ocpu-Server:
+      - rApache
+      Vary:
+      - Accept-Encoding
+      X-Ocpu-Cache:
+      - HIT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        Package: My package
+        Type: Package
+    http_version: 
+  recorded_at: Fri, 10 Jun 2016 16:20:39 GMT
+recorded_with: VCR 2.9.3

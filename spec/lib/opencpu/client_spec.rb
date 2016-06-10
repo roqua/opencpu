@@ -128,6 +128,16 @@ describe OpenCPU::Client do
       end
     end
 
+    describe '#description' do
+      it 'returns the content of the package DESCRIPTION file' do
+        VCR.use_cassette :description do |cassette|
+          response = client.description('ade4')
+          expect(response.body).to eq "Package: My package\n" \
+                                      "Type: Package\n"
+        end
+      end
+    end
+
     context 'user packages' do
       before do
         OpenCPU.configure do |config|
