@@ -167,8 +167,8 @@ To access the entire content of a package's DESCRIPTION file
 ```Ruby
 client.description 'mypackage'
 # => "Package: mypackage
-      Version: 1.00
-      ..."
+#     Version: 1.00
+#     ..."
 ```
 
 ## Testing
