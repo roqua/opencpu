@@ -97,13 +97,9 @@ module OpenCPU
     end
 
     def package_url(package, user = :system, github_remote = false)
-      if user == :system
-        "/library/#{package}"
-      elsif github_remote
-        "/github/#{user}/#{package}"
-      else
-        "/user/#{user}/library/#{package}"
-      end
+      return "/library/#{package}" if user == :system
+      return "/github/#{user}/#{package}" if github_remote
+      return "/user/#{user}/library/#{package}"
     end
 
     def fake_response_for(url)
