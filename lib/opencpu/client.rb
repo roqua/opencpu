@@ -26,7 +26,7 @@ module OpenCPU
       github_remote = options.fetch :github_remote, false
 
       url = "#{package_url(package, user, github_remote)}/info"
-      self.class.get(url, request_options('', :json))
+      self.class.get(url, request_options(nil, :json))
     end
 
     def convert_na_to_nil(data)
@@ -78,10 +78,10 @@ module OpenCPU
 
       case format
       when :json
-        options[:body] = data.to_json
+        options[:body] = data.to_json if data
         options[:headers] =  {"Content-Type" => 'application/json'}
       when :urlencoded
-        options[:query] = data
+        options[:query] = data if data
       end
 
       if OpenCPU.configuration.username && OpenCPU.configuration.password
