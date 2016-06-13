@@ -93,13 +93,17 @@ module OpenCPU
     end
 
     def function_url(package, function, user = :system, github_remote = false, format = nil)
-      package_url(package, user, github_remote) + ['', 'R', function, format.to_s].join('/')
+      "#{package_url(package, user, github_remote)}/R/#{function}/#{format.to_s}"
     end
 
     def package_url(package, user = :system, github_remote = false)
-      return ['', 'library', package].join('/') if user == :system
-      return ['', 'github', user, package].join('/') if github_remote
-      return ['', 'user', user, 'library', package].join('/')
+      if user == :system
+        "/library/#{package}"
+      elsif github_remote
+        "/github/#{user}/#{package}"
+      else
+        "/user/#{user}/library/#{package}"
+      end
     end
 
     def fake_response_for(url)

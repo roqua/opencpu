@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe OpenCPU::Client do
+  let(:client) { described_class.new }
 
   before do
     OpenCPU.configure do |config|
@@ -47,7 +48,6 @@ describe OpenCPU::Client do
   end
 
   describe '#prepare' do
-    let(:client) { described_class.new }
     let(:delayed_calculation) { client.prepare('digest', 'hmac', data: { key: "baz", object: "qux" }) }
 
     it 'returns a DelayedCalculation' do
@@ -67,7 +67,6 @@ describe OpenCPU::Client do
     after do
       OpenCPU.disable_test_mode!
     end
-    let(:client) { described_class.new }
 
     it 'is used to quickly return JSON results' do
       VCR.use_cassette :animation_flip_coin, record: :new_episodes do
@@ -92,7 +91,7 @@ describe OpenCPU::Client do
     context 'url encoded request' do
       it 'sends the parameters url_encoded' do
         VCR.use_cassette :url_encoded_request do |cassette|
-          response = client.execute(:base, :identity, format: nil, data: { x: 'data.frame(x=1,y=1)' })
+          client.execute(:base, :identity, format: nil, data: { x: 'data.frame(x=1,y=1)' })
           params = cassette.serializable_hash['http_interactions'][0]['request']['body']['string']
           expect(params).to eq "x=data.frame(x%3D1%2Cy%3D1)"
         end
@@ -148,7 +147,6 @@ describe OpenCPU::Client do
         end
       end
       after { OpenCPU.reset_configuration! }
-      let(:client) { described_class.new }
 
       it "can access user packages" do
         VCR.use_cassette :user_digest_hmac do
@@ -165,7 +163,6 @@ describe OpenCPU::Client do
         end
       end
       after { OpenCPU.reset_configuration! }
-      let(:client) { described_class.new }
 
       it "can access github packages" do
         VCR.use_cassette :github_animation_flip_coin do
@@ -210,8 +207,6 @@ describe OpenCPU::Client do
   end
 
   describe "#convert_na_to_nil" do
-    let(:client) { described_class.new }
-
     it "converts 'NA' values in hashes in arrays" do
       res = client.convert_na_to_nil([4, {foo: 'NA'}])
       expect(res[1][:foo]).to be_nil
@@ -225,6 +220,38 @@ describe OpenCPU::Client do
     it 'leaves other values alone' do
       res = client.convert_na_to_nil(foo: [1, 'NOTNA'])
       expect(res[:foo][1]).to eq 'NOTNA'
+    end
+  end
+
+  describe '#function_url' do
+    before { allow(client).to receive(:package_url).and_return '<package url>' }
+
+    subject { client.send(:function_url, 'some_package', 'some_function', :kees, false, :json) }
+
+    it { is_expected.to eq '<package url>/R/some_function/json' }
+  end
+
+  describe '#package_url' do
+    let(:from_github) { false }
+
+    subject { client.send(:package_url, 'some_package', user, from_github) }
+
+    context ':system user' do
+      let(:user) { :system }
+      it { is_expected.to eq '/library/some_package' }
+    end
+
+    context 'other user' do
+      let(:user) { :kees }
+
+      context 'package is from GitHub' do
+        let(:from_github) { true }
+        it { is_expected.to eq '/github/kees/some_package' }
+      end
+
+      context 'other source' do
+        it { is_expected.to eq '/user/kees/library/some_package' }
+      end
     end
   end
 
