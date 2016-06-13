@@ -1,3 +1,7 @@
+# 0.9.2
+
+* Added `OpenCPU::Client#description` to retrieve a packages' description file
+
 # 0.9.1
 
 * Added `convert_na_to_nil=true/false` option to Client#execute
