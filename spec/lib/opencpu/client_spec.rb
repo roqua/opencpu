@@ -127,16 +127,6 @@ describe OpenCPU::Client do
       end
     end
 
-    describe '#description' do
-      it 'returns the content of the package DESCRIPTION file' do
-        VCR.use_cassette :description do |cassette|
-          response = client.description('ade4')
-          expect(response.body).to eq "Package: My package\n" \
-                                      "Type: Package\n"
-        end
-      end
-    end
-
     context 'user packages' do
       before do
         OpenCPU.configure do |config|
@@ -202,6 +192,16 @@ describe OpenCPU::Client do
           expect(client.execute(:animation, 'flip.coin')).to eq({response: 2})
           expect(client.execute(:animation, 'flip.test')).to eq({response: 3})
         end
+      end
+    end
+  end
+
+  describe '#description' do
+    it 'returns the content of the package DESCRIPTION file' do
+      VCR.use_cassette :description do |cassette|
+        response = client.description('ade4')
+        expect(response.body).to eq "Package: My package\n" \
+                                    "Type: Package\n"
       end
     end
   end
