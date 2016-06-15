@@ -161,6 +161,16 @@ If you want to send one or more files along, you can pass in a File object as da
 client.execute :foo, :bar, user: :johndoe, data: {file: File.new('/tmp/test.foo')}, format: :urlencoded
 ```
 
+**Package desciption**
+
+To access the entire content of a package's DESCRIPTION file
+```Ruby
+client.description :mypackage
+# => "Package: mypackage
+#     Version: 1.00
+#     ..."
+```
+
 ## Testing
 
 **NOTE:** Test mode is only supported in combination with `#execute` and the

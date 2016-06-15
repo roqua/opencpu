@@ -14,11 +14,19 @@ module OpenCPU
       github_remote             = options.fetch :github_remote, false
       should_convert_na_to_nil  = options.fetch :convert_na_to_nil, false
 
-      process_query package_url(package, function, user, github_remote, :json), data, format do |response|
+      process_query function_url(package, function, user, github_remote, :json), data, format do |response|
         output = JSON.parse(response.body)
         output = convert_na_to_nil(output) if should_convert_na_to_nil
         output
       end
+    end
+
+    def description(package, options = {})
+      user          = options.fetch :user, :system
+      github_remote = options.fetch :github_remote, false
+
+      url = "#{package_url(package, user, github_remote)}/info"
+      self.class.get(url, request_options(nil, :json))
     end
 
     def convert_na_to_nil(data)
@@ -39,7 +47,7 @@ module OpenCPU
       data = options.fetch :data, {}
       format = options.fetch :format, :json
       github_remote = options.fetch :github_remote, false
-      process_query package_url(package, function, user, github_remote), data, format do |response|
+      process_query function_url(package, function, user, github_remote), data, format do |response|
         location  = response.headers['location']
         resources = response.body.split(/\n/)
         OpenCPU::DelayedCalculation.new(location, resources)
@@ -70,10 +78,10 @@ module OpenCPU
 
       case format
       when :json
-        options[:body] = data.to_json
+        options[:body] = data.to_json if data
         options[:headers] =  {"Content-Type" => 'application/json'}
       when :urlencoded
-        options[:query] = data
+        options[:query] = data if data
       end
 
       if OpenCPU.configuration.username && OpenCPU.configuration.password
@@ -84,10 +92,14 @@ module OpenCPU
       options
     end
 
-    def package_url(package, function, user = :system, github_remote = false, format = nil)
-      return ['', 'library', package, 'R', function, format.to_s].join('/') if user == :system
-      return ['', 'github', user, package, 'R', function, format.to_s].join('/') if github_remote
-      return ['', 'user', user, 'library', package, 'R', function, format.to_s].join('/')
+    def function_url(package, function, user = :system, github_remote = false, format = nil)
+      "#{package_url(package, user, github_remote)}/R/#{function}/#{format.to_s}"
+    end
+
+    def package_url(package, user = :system, github_remote = false)
+      return "/library/#{package}" if user == :system
+      return "/github/#{user}/#{package}" if github_remote
+      return "/user/#{user}/library/#{package}"
     end
 
     def fake_response_for(url)
