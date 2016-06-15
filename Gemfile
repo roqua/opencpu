@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 group :development do
-  gem 'listen', '~> 2.7.0'
+  gem 'listen', '~> 3.0.8'
   gem 'guard-rspec', '~> 4.2'
   gem 'guard-bundler', '~> 2.0'
 end
