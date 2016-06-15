@@ -165,7 +165,7 @@ client.execute :foo, :bar, user: :johndoe, data: {file: File.new('/tmp/test.foo'
 
 To access the entire content of a package's DESCRIPTION file
 ```Ruby
-client.description 'mypackage'
+client.description :mypackage
 # => "Package: mypackage
 #     Version: 1.00
 #     ..."
