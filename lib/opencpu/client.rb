@@ -74,6 +74,8 @@ module OpenCPU
 
     def error_class_for(response_code)
       case response_code
+      when 403
+        AccessDenied
       when 400..499
         BadRequest
       when 500..599
