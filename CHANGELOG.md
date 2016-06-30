@@ -1,3 +1,8 @@
+# 0.10.0
+
+* BREAKING CHANGE: on request failure, it raises a specific error (BadRequest, InternalServerError or Unknown Error)
+  instead of StandardError
+
 # 0.9.2
 
 * Added `OpenCPU::Client#description` to retrieve a packages' description file

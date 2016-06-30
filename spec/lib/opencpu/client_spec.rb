@@ -21,6 +21,34 @@ describe OpenCPU::Client do
     expect(described_class.new).to respond_to :prepare
   end
 
+  describe '#process_query' do
+    let(:client) { described_class.new}
+    let(:url) { '/library/base/R/identity/json' }
+    let(:data) { { some: 'data' } }
+    let(:format) { :json }
+    let(:response_handler) { -> { nil } }
+
+    subject { client.send(:process_query, url, data, format) { |response| response_handler(response) } }
+
+    context 'test mode' do
+      it 'calls fake_response_for(url)' do
+        allow(OpenCPU).to receive(:test_mode?).and_return true
+        expect(client).to receive(:fake_response_for)
+        subject
+      end
+    end
+
+    context 'no test mode' do
+      context 'HTTP failure' do
+        it 'returns the appropiate status code' do
+          VCR.use_cassette :bad_request do
+            expect { subject }.to raise_error OpenCPU::Errors::BadRequest
+          end
+        end
+      end
+    end
+  end
+
   describe 'initializes' do
 
     describe 'without configured attributes' do
@@ -167,7 +195,7 @@ describe OpenCPU::Client do
         VCR.use_cassette :github_animation_flip_coin_error do
           expect {
             client.execute(:foo, :bar, {user: "baz", github_remote: true})
-          }.to raise_error RuntimeError, /400: Bad Request/
+          }.to raise_error OpenCPU::Errors::BadRequest, /400/
         end
       end
     end
