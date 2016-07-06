@@ -1,7 +1,11 @@
+# 0.11.0
+
+* BREAKING CHANGE: on unknown failure, it raises OpenCPUError instead of UnknownError
+
 # 0.10.0
 
 * BREAKING CHANGE: on request failure, it raises a specific error (BadRequest, InternalServerError or Unknown Error)
-  instead of StandardError
+  instead of StandardError, otherwise it wouldn't have been a breaking change
 
 # 0.9.2
 

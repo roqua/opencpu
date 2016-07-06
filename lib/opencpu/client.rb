@@ -81,7 +81,7 @@ module OpenCPU
       when 500..599
         InternalServerError
       else
-        UnknownError
+        OpenCPUError
       end
     end
 
