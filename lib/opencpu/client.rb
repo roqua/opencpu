@@ -1,5 +1,8 @@
+require 'opencpu/errors'
+
 module OpenCPU
   class Client
+    include Errors
     include HTTMultiParty
 
     def initialize
@@ -64,10 +67,21 @@ module OpenCPU
       case response.code
       when 200..201
         return yield(response)
-      when 400
-        fail '400: Bad Request\n' + response.body
       else
-        fail "#{response.code}:\n #{response.body}"
+        fail error_class_for(response.code), "#{response.code}:\n #{response.body}"
+      end
+    end
+
+    def error_class_for(response_code)
+      case response_code
+      when 403
+        AccessDenied
+      when 400..499
+        BadRequest
+      when 500..599
+        InternalServerError
+      else
+        UnknownError
       end
     end
 
