@@ -17,7 +17,7 @@ module OpenCPU
       github_remote             = options.fetch :github_remote, false
       should_convert_na_to_nil  = options.fetch :convert_na_to_nil, false
 
-      query_method = if activesupport_notifications_loaded?
+      query_method = if appsignal_loaded?
 											 :process_query_with_instrumentation
                      else
                        :process_query
@@ -66,7 +66,7 @@ module OpenCPU
     private
 
     def process_query_with_instrumentation(url, data, format, &block)
-      ActiveSupport::Notifications.instrument 'opencpu', url: url, data: data do
+      Appsignal.instrument 'opencpu', url: url, data: data do
         process_query(url, data, format, &block)
       end
 		end
@@ -139,8 +139,8 @@ module OpenCPU
       (url_parts - remove_items).join('/')
     end
 
-    def activesupport_notifications_loaded?
-      defined?(ActiveSupport::Notifications) && ActiveSupport::Notifications.respond_to?(:instrument)
+    def appsignal_loaded?
+      defined?(Appsignal) && Appsignal.respond_to?(:instrument)
     end
   end
 end
