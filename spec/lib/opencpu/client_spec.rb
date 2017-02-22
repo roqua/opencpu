@@ -96,6 +96,26 @@ describe OpenCPU::Client do
       OpenCPU.disable_test_mode!
     end
 
+    context 'ActiveSupport instrumentation is loaded' do
+      it 'Does the call within an instrumentation block' do
+        VCR.use_cassette :animation_flip_coin, record: :new_episodes do
+          require 'active_support/notifications'
+          expect(ActiveSupport::Notifications).to receive(:instrument).with('opencpu', url: '/library/animation/R/flip.coin/json', data: {})
+          response = client.execute(:animation, 'flip.coin')
+        end
+      end
+    end
+
+    context 'ActiveSupport instrumentation is not loaded' do
+      it 'Does the call without instrumentation' do
+        VCR.use_cassette :animation_flip_coin, record: :new_episodes do
+          ActiveSupport.send(:remove_const, :Notifications) # Undefine
+          expect(client).not_to receive(:instrumented_call)
+          response = client.execute(:animation, 'flip.coin')
+        end
+      end
+    end
+
     it 'is used to quickly return JSON results' do
       VCR.use_cassette :animation_flip_coin, record: :new_episodes do
         response = client.execute(:animation, 'flip.coin')
