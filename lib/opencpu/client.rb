@@ -17,7 +17,13 @@ module OpenCPU
       github_remote             = options.fetch :github_remote, false
       should_convert_na_to_nil  = options.fetch :convert_na_to_nil, false
 
-      process_query function_url(package, function, user, github_remote, :json), data, format do |response|
+      query_method = if appsignal_loaded?
+                       :process_query_with_instrumentation
+                     else
+                       :process_query
+                     end
+
+      send(query_method, function_url(package, function, user, github_remote, :json), data, format) do |response|
         output = JSON.parse(response.body)
         output = convert_na_to_nil(output) if should_convert_na_to_nil
         output
@@ -58,6 +64,12 @@ module OpenCPU
     end
 
     private
+
+    def process_query_with_instrumentation(url, data, format, &block)
+      Appsignal.instrument 'opencpu', url, data.to_s do
+        process_query(url, data, format, &block)
+      end
+    end
 
     def process_query(url, data, format, &block)
       return fake_response_for(url) if OpenCPU.test_mode?
@@ -125,6 +137,10 @@ module OpenCPU
       url_parts    = url.gsub!(/^\//, '').split('/')
       remove_items = ['R', 'library', 'json']
       (url_parts - remove_items).join('/')
+    end
+
+    def appsignal_loaded?
+      defined?(Appsignal) && Appsignal.respond_to?(:instrument)
     end
   end
 end
