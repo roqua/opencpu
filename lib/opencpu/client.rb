@@ -69,7 +69,7 @@ module OpenCPU
       Appsignal.instrument 'opencpu', url, data.to_s do
         process_query(url, data, format, &block)
       end
-		end
+    end
 
     def process_query(url, data, format, &block)
       return fake_response_for(url) if OpenCPU.test_mode?
