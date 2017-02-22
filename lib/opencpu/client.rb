@@ -66,7 +66,7 @@ module OpenCPU
     private
 
     def process_query_with_instrumentation(url, data, format, &block)
-      ActiveSupport::Notifications.instrument 'opencpu', url: url, data: data do
+      Appsignal.instrument 'opencpu', url: url, data: data do
         process_query(url, data, format, &block)
       end
 		end
