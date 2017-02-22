@@ -100,7 +100,7 @@ describe OpenCPU::Client do
       it 'Does the call within an instrumentation block' do
         VCR.use_cassette :animation_flip_coin, record: :new_episodes do
           require 'appsignal'
-          expect(Appsignal).to receive(:instrument).with('opencpu', url: '/library/animation/R/flip.coin/json', data: {})
+          expect(Appsignal).to receive(:instrument).with('opencpu', '/library/animation/R/flip.coin/json', "{}")
           response = client.execute(:animation, 'flip.coin')
         end
       end
