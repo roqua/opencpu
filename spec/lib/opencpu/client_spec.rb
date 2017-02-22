@@ -99,8 +99,10 @@ describe OpenCPU::Client do
     context 'Appsignal instrumentation is loaded' do
       it 'Does the call within an instrumentation block' do
         VCR.use_cassette :animation_flip_coin, record: :new_episodes do
-          require 'appsignal'
-          expect(Appsignal).to receive(:instrument).with('opencpu', '/library/animation/R/flip.coin/json', "{}")
+          stub_const("Appsignal", Class.new)
+          Appsignal.define_singleton_method(:instrument) { |**args| }
+
+          expect(client).to receive(:process_query_with_instrumentation)
           response = client.execute(:animation, 'flip.coin')
         end
       end
@@ -109,7 +111,7 @@ describe OpenCPU::Client do
     context 'Appsignal instrumentation is not loaded' do
       it 'Does the call without instrumentation' do
         VCR.use_cassette :animation_flip_coin, record: :new_episodes do
-          expect(client).not_to receive(:instrumented_call)
+          expect(client).not_to receive(:process_query_with_instrumentation)
           response = client.execute(:animation, 'flip.coin')
         end
       end
