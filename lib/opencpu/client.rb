@@ -18,10 +18,10 @@ module OpenCPU
       should_convert_na_to_nil  = options.fetch :convert_na_to_nil, false
 
       query_method = if appsignal_loaded?
-											 :process_query_with_instrumentation
+                       :process_query_with_instrumentation
                      else
                        :process_query
-										 end
+                     end
 
       send(query_method, function_url(package, function, user, github_remote, :json), data, format) do |response|
         output = JSON.parse(response.body)
