@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 1.9.3'
 
-  spec.add_dependency             'yajl-ruby',      '~> 1.2',     '>= 1.2.0'
+  spec.add_dependency             'yajl-ruby',      '~> 1.3',     '>= 1.3.1'
   spec.add_dependency             'httmultiparty',  '~> 0.3.16'
 
   spec.add_development_dependency 'bundler',        '~> 1.6',     '>= 1.6.0'
