@@ -107,7 +107,8 @@ module OpenCPU
     end
 
     def function_url(package, function, user = :system, github_remote = false, format = nil)
-      "#{package_url(package, user, github_remote)}/R/#{function}/#{format.to_s}"
+      "#{package_url(package, user, github_remote)}/#{function}/#{format.to_s}"
+      # "#{package_url(package, user, github_remote)}/R/#{function}/#{format.to_s}"
     end
 
     def package_url(package, user = :system, github_remote = false)

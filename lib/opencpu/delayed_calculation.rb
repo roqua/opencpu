@@ -3,6 +3,7 @@ module OpenCPU
   class ResponseNotAvailableError < StandardError; end
   
   class DelayedCalculation
+    include Errors
     include HTTMultiParty
 
     attr_accessor :location
@@ -50,7 +51,52 @@ module OpenCPU
       process_resource @available_resources[:info].to_s
     end
 
+    def keys
+      @available_resources.keys
+    end
+
+    # available_resources(:"R/foo")
+    def available_resources(key)
+      raise ResponseNotAvailableError unless @available_resources.has_key?(key)
+      process_resource @available_resources[key].to_s
+    end
+
+    def process_resources(key, options = {})
+      options = {
+        user: :system,
+        format: :json,
+        data: {}
+        # method: :post
+      }.merge(options)
+
+      puts options
+
+      raise ResponseNotAvailableError unless @available_resources.has_key?(key)
+      url = @available_resources[key].to_s
+      data = options[:data]
+      format = options[:format]
+
+      process_query url, data, format do |response|
+        location  = response.headers['location']
+        resources = response.body.split(/\n/)
+        OpenCPU::DelayedCalculation.new(location, resources)
+      end
+    end
+
     private
+
+    def process_query(url, data, format, &block)
+      return fake_response_for(url) if OpenCPU.test_mode?
+
+      response  = self.class.post(url, request_options(data, format))
+
+      case response.code
+      when 200..201
+        return yield(response)
+      else
+        fail error_class_for(response.code), "#{response.code}:\n #{response.body}"
+      end
+    end
 
     def process_resource(resource)
       response = self.class.get resource
@@ -83,5 +129,40 @@ module OpenCPU
       key = :graphics if key =~ /graphics\/\d/
       key.to_sym
     end
+
+    def request_options(data, format)
+      options = {
+        verify: OpenCPU.configuration.verify_ssl
+      }
+
+      case format
+      when :json
+        options[:body] = data.to_json if data
+        options[:headers] =  {"Content-Type" => 'application/json'}
+      when :urlencoded
+        options[:query] = data if data
+      end
+
+      if OpenCPU.configuration.username && OpenCPU.configuration.password
+        options[:basic_auth] = {
+          username: OpenCPU.configuration.username, password: OpenCPU.configuration.password
+        }
+      end
+      options
+    end
+
+    def error_class_for(response_code)
+      case response_code
+      when 403
+        AccessDenied
+      when 400..499
+        BadRequest
+      when 500..599
+        InternalServerError
+      else
+        OpenCPUError
+      end
+    end
   end
+
 end
