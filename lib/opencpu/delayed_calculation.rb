@@ -66,10 +66,7 @@ module OpenCPU
         user: :system,
         format: :json,
         data: {}
-        # method: :post
       }.merge(options)
-
-      puts options
 
       raise ResponseNotAvailableError unless @available_resources.has_key?(key)
       url = @available_resources[key].to_s
