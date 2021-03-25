@@ -1,9 +1,9 @@
 module OpenCPU
   class UnsupportedFormatError < StandardError; end
   class ResponseNotAvailableError < StandardError; end
-  
+
   class DelayedCalculation
-    include HTTMultiParty
+    include HTTParty
 
     attr_accessor :location
     attr_accessor :available_resources

@@ -6,8 +6,5 @@ group :development do
   gem 'guard-bundler', '~> 2.0'
 end
 
-group :test do
-  gem "codeclimate-test-reporter", require: nil
-end
 # Specify your gem's dependencies in opencpu.gemspec
 gemspec

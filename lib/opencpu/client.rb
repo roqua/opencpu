@@ -3,7 +3,7 @@ require 'opencpu/errors'
 module OpenCPU
   class Client
     include Errors
-    include HTTMultiParty
+    include HTTParty
 
     def initialize
       self.class.base_uri OpenCPU.configuration.endpoint_url
