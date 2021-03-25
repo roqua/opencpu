@@ -1,3 +1,7 @@
+# 0.13.0
+
+Switch from HTTMultiparty to HTTParty
+
 # 0.11.0
 
 * BREAKING CHANGE: on unknown failure, it raises OpenCPUError instead of UnknownError
