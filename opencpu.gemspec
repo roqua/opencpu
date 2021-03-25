@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.files         = Dir["{lib,vendor}/**/*"] + ["README.md", "LICENSE.txt"]
   spec.test_files    = Dir["spec/**/*"]
+  spec.require_path     = "lib"
 
   spec.required_ruby_version = '>= 2.5.0'
 
