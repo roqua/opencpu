@@ -13,12 +13,11 @@ Gem::Specification.new do |spec|
   spec.homepage      = "http://roqua.nl"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.files         = Dir["{lib,vendor}/**/*"] + ["README.md", "LICENSE.txt"]
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  spec.require_paths =  Dir["spec/**/*"]
 
-  spec.required_ruby_version = '>= 1.9.3'
+  spec.required_ruby_version = '>= 2.5.0'
 
   spec.add_dependency             'yajl-ruby',      '~> 1.3',     '>= 1.3.1'
   spec.add_dependency             'httparty',  '~> 0.16'
