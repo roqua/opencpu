@@ -94,8 +94,8 @@ module OpenCPU
       when :json
         options[:body] = data.to_json if data
         options[:headers] =  {"Content-Type" => 'application/json'}
-      when :urlencoded
-        options[:query] = data if data
+      else # :urlencoded / :multipart if a file is present.
+        options[:body] = data if data
       end
 
       if OpenCPU.configuration.username && OpenCPU.configuration.password

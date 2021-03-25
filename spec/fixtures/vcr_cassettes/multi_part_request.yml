@@ -1,0 +1,96 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://public.opencpu.org/ocpu/library/utils/R/read.csv/json
+    body:
+      encoding: UTF-8
+      string: "--------------------------uMeWJC8mkGqpOEXA\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"test.csv\"\r\nContent-Type: text/csv\r\n\r\n\"head1\",
+        \"head2\", \"head3\"\n1, 2, 3\n4, 5, 6\n\r\n--------------------------uMeWJC8mkGqpOEXA--\r\n"
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - multipart/form-data; boundary=------------------------uMeWJC8mkGqpOEXA
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Thu, 25 Mar 2021 16:45:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '68'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=ddcca6afafd864d5be3ebf54be87d3fd81616690728; expires=Sat, 24-Apr-21
+        16:45:28 GMT; path=/; domain=.opencpu.org; HttpOnly; SameSite=Lax
+      Cache-Control:
+      - max-age=300, public
+      X-Ocpu-Session:
+      - x022b0ae9efe318
+      Location:
+      - https://public.opencpu.org/ocpu/tmp/x022b0ae9efe318/
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Location, X-ocpu-session, Content-Type, Cache-Control
+      Access-Control-Allow-Headers:
+      - Origin, Content-Type, Accept, Accept-Encoding, Cache-Control, Authorization
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Ocpu-R:
+      - R version 4.0.4 (2021-02-15)
+      X-Ocpu-Locale:
+      - en_US.UTF-8
+      X-Ocpu-Time:
+      - 2021-03-25 16:45:28 UTC
+      X-Ocpu-Version:
+      - 2.2.2
+      X-Ocpu-Server:
+      - rApache
+      Vary:
+      - Accept-Encoding
+      X-Ocpu-Cache:
+      - MISS
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Request-Id:
+      - '090bdfe60e0000fa74cd15a000000001'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=CSE68Tj98VN34FsQ6GxERhvu4VRaA0JzlUz%2BC4SjYpsvmgJnt0QIplPYttApcvWjIGElSwKCQchbvehe0OpnRaaXHiJeYFgodWCihTPBJYt9%2FP4%3D"}]}'
+      Nel:
+      - '{"max_age":604800,"report_to":"cf-nel"}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 63599c1ceefafa74-AMS
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+            "head1": 1,
+            "head2": 2,
+            "head3": 3
+          },
+          {
+            "head1": 4,
+            "head2": 5,
+            "head3": 6
+          }
+        ]
+  recorded_at: Thu, 25 Mar 2021 16:45:28 GMT
+recorded_with: VCR 6.0.0
