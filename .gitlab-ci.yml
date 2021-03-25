@@ -1,0 +1,13 @@
+image: ruby:2.7
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .gems
+
+before_script:
+  - bundle install -j $(nproc) --path .gems
+
+rspec:
+  script:
+    - bundle exec rspec
