@@ -41,7 +41,7 @@ client = OpenCPU.client
 
 By default we send data using the json format. This format is efficient and safe, but only supports strings and numeric parameters (see [opencpu page](https://www.opencpu.org/api.html#api-arguments))
 
-If you want to send R code argument, you'll need to specify format: :urlencoded in your request. Note that you need to enclose your string parameters in quotes in that case, since they will be seen as variables otherwise:
+If you want to send R code argument or files, you'll need to specify format: :urlencoded in your request. Note that you need to enclose your string parameters in quotes in that case, since they will be seen as variables otherwise:
 
 ```Ruby
 client.execute :digest, :hmac, data: { key: "'foo'", object: "'bar'" }, format: :urlencoded
