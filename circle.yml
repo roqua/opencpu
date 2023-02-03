@@ -2,4 +2,4 @@ machine:
   environment:
     CODECLIMATE_REPO_TOKEN: ecaec3d271bf32a8e203cafb71cc565d57a86dc0571b5529b491935e786001ff 
   ruby:
-    version: 2.7.2
+    version: 3.2.0
