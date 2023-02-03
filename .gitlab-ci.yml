@@ -1,4 +1,4 @@
-image: ruby:2.7
+image: ruby:3.2
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
